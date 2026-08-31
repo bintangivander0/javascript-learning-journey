@@ -4,7 +4,7 @@ Program ini digunakan untuk menjumlahkan semua angka Fibonacci berstatus **ganji
 
 Aturan barisan Fibonacci dan kondisi penjumlahan:
 - Barisan dimulai dari angka `0` dan `1`.
-- Setiap angka berikutnya adalah hasil penjumlahan dari dua angka sebelumnya ($0, 1, 1, 2, 3, 5, 8, 13, /dots$).
+- Setiap angka berikutnya adalah hasil penjumlahan dari dua angka sebelumnya ($0, 1, 1, 2, 3, 5, 8, 13, \dots$).
 - Hanya angka Fibonacci yang bernilai **ganjil** yang akan diakumulasikan ke dalam hasil akhir.
 
 ## Yang Saya Pelajari
