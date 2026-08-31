@@ -1,4 +1,4 @@
-# Drop Elements (Drop it)
+# Element Skipper
 
 Program ini digunakan untuk memfilter atau menyaring elemen array dari depan. Fungsi akan menghapus elemen array pertama satu per satu sampai kondisi yang ditentukan oleh fungsi penguji (`func`) menghasilkan nilai `true`. Begitu kondisi terpenuhi, proses penghapusan berhenti dan sisa array akan dikembalikan.
 
