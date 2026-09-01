@@ -89,15 +89,10 @@ Kalau `item` ditemukan di `numToDel`, hasil `includes()` adalah `true`.
 Karena ada `!`, hasilnya menjadi `false`, sehingga item tersebut tidak masuk ke array hasil.
 
 Alurnya:
+1. Ambil item
+2. Cek apakah ada di daftar yang mau dihapus
+3. Kalau ada, buang. Kalau tidak ada, simpan
 
-```text
-ambil item
-↓
-cek apakah ada di daftar yang mau dihapus
-↓
-kalau ada → buang
-kalau tidak ada → simpan
-```
 
 **Platform:** freeCodeCamp  
 **Language:** JavaScript
