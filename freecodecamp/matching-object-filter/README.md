@@ -542,7 +542,5 @@ filter()
 ```
 
 **Platform:** freeCodeCamp
-
 **Lab:** Matching Object Filter Function
-
 **Language:** JavaScript
