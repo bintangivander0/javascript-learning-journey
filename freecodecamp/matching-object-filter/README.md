@@ -1,4 +1,4 @@
-# Wherefore Art Thou
+# Mathing Object Filter Function
 
 Lab ini membuat function untuk mencari object yang memiliki semua property dan value yang sama dengan object `source`.
 
@@ -539,20 +539,6 @@ every()
 
 filter()
 → "kalau cocok, simpan object-nya"
-```
-
-Jadi alur keseluruhannya:
-
-```text
-filter object
-↓
-ambil key dari source
-↓
-cek semua key
-↓
-semua value sama?
-↓
-masukkan ke hasil
 ```
 
 **Platform:** freeCodeCamp  
