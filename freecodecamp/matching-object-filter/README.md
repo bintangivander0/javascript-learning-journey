@@ -528,7 +528,7 @@ book.author
 
 Tetapi dengan `Object.keys()`, saya bisa mengambil daftar property object secara otomatis.
 
-Mental model yang saya pakai:
+Pola pikir yang saya pakai:
 
 ```text
 Object.keys(source)
@@ -541,5 +541,6 @@ filter()
 → "kalau cocok, simpan object-nya"
 ```
 
-**Platform:** freeCodeCamp  
+**Platform:** freeCodeCamp
+**Lab:** Matching Object Filter Function
 **Language:** JavaScript
