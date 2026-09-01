@@ -1,4 +1,4 @@
-# Mathing Object Filter Function
+# Matching Object Filter Function
 
 Lab ini membuat function untuk mencari object yang memiliki semua property dan value yang sama dengan object `source`.
 
