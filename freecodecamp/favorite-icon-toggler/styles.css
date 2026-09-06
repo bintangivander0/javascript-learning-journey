@@ -1,0 +1,27 @@
+.favorite-icon {
+  /* Menghilangkan warna latar belakang */
+  background: none;
+  /* Menghilangkan garis tepi */
+  border: none;
+  /* Menghilangkan ruang kosong di dalam tombol */
+  padding: 0;
+  /* Mengatur ukuran emoji */
+  font-size: 20px;
+  /* Mengubah kursor menjadi pointer saat diarahkan ke tombol */
+  cursor: pointer;
+  /* Menghilangkan garis biru saat tombol diklik */
+  outline: none;
+}
+
+.filled {
+  color: red;
+  font-size: 22px;
+}
+
+ul {
+  list-style: none;
+}
+
+ul li:not(:last-child) {
+  border-bottom: 1px solid #bbb8b8; 
+}
