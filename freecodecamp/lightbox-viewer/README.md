@@ -1,4 +1,8 @@
 # Build a Lightbox Viewer
+Ilustrasi:
+<img width="959" height="503" alt="image" src="https://github.com/user-attachments/assets/e18fec8f-70e9-481a-8395-6d2420b5ddda" />
+
+<img width="959" height="504" alt="image" src="https://github.com/user-attachments/assets/ac3c0d35-15ca-46bd-ae96-bf606403041f" />
 
 Project ini membuat galeri gambar sederhana dengan fitur **lightbox viewer**.
 
