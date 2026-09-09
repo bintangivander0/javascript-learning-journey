@@ -1,14 +1,25 @@
-const tabs = document.querySelectorAll('[role="tab"]');
-const panels = document.querySelectorAll('[role="tabpanel"]');
+const noteEl = document.getElementById("note");
+const statusEl = document.getElementById("status");
 
-tabs.forEach(tab => {
-  tab.addEventListener("click", () => {
-    tabs.forEach(t => t.setAttribute("aria-selected", "false"));
-    panels.forEach(p => p.hidden = true);
+let currentContent = "";
 
-    tab.setAttribute("aria-selected", "true");
-    const associatedPanel = tab.getAttribute("aria-controls");
-    const panel = document.getElementById(associatedPanel);
-    panel.hidden = false;
-  });
+noteEl.addEventListener("focus", () => {
+  statusEl.textContent = "";
+});
+
+noteEl.addEventListener("blur", () => {
+  const newContent = noteEl.innerHTML;
+
+  if (currentContent === newContent) {
+    return;
+  }
+
+  currentContent = newContent;
+  console.log(currentContent);
+
+  statusEl.textContent = "Note saved successfully!";
+});
+
+window.addEventListener("DOMContentLoaded", () => {
+  currentContent = noteEl.textContent;
 });
