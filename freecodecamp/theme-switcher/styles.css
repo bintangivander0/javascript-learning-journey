@@ -1,0 +1,135 @@
+@import url('https://fonts.googleapis.com/css2?family=Adamina&family=Geist+Pixel&family=Inter+Tight:ital,wght@0,100..900;1,100..900&family=Playfair:ital,opsz,wght@0,5..1200,300..900;1,5..1200,300..900&display=swap');
+
+:root {
+  --bg-color: #f4f7fb;
+  --surface-color: #ffffff;
+  --text-color: #1f2937;
+  --border-color: #cbd5e1;
+  --accent-color: #8299cb;
+  --hover-color: #e2e8f0;
+}
+
+body.theme-light {
+  --bg-color: #f4f7fb;
+  --surface-color: #ffffff;
+  --text-color: #1f2937;
+  --border-color: #cbd5e1;
+  --accent-color: #8299cb;
+  --hover-color: #e2e8f0;
+}
+
+body.theme-dark {
+  --bg-color: #111827;
+  --surface-color: #1f2937;
+  --text-color: #f9fafb;
+  --border-color: #475569;
+  --accent-color: #8299cb;
+  --hover-color: #334155;
+}
+
+body {
+  margin: 0;
+  min-height: 100vh;
+
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+
+  padding-top: 4rem;
+
+  font-family: "Geist Pixel", sans-serif;
+
+  background-color: var(--bg-color);
+  color: var(--text-color);
+
+  transition:
+    background-color 0.3s ease,
+    color 0.3s ease;
+}
+
+#theme-switcher-button {
+  width: 180px;
+
+  padding: 0.8rem 1rem;
+
+  border: 1px solid var(--border-color);
+  border-radius: 10px;
+
+  background-color: var(--surface-color);
+  color: var(--text-color);
+
+  font-size: 1rem;
+  font-weight: bold;
+
+  cursor: pointer;
+
+  transition:
+    background-color 0.2s ease,
+    transform 0.2s ease,
+    border-color 0.2s ease;
+}
+
+#theme-switcher-button:hover {
+  background-color: var(--hover-color);
+  transform: translateY(-2px);
+}
+
+#theme-switcher-button:focus-visible {
+  outline: 3px solid var(--accent-color);
+  outline-offset: 3px;
+}
+
+#theme-dropdown {
+  width: 180px;
+
+  margin: 0.5rem 0 0;
+  padding: 0.4rem;
+
+  list-style: none;
+
+  background-color: var(--surface-color);
+
+  border: 1px solid var(--border-color);
+  border-radius: 10px;
+
+  box-shadow: 0 8px 20px rgba(0, 0, 0, 0.15);
+}
+
+#theme-dropdown [role="menuitem"] {
+  padding: 0.7rem 0.8rem;
+
+  border-radius: 7px;
+
+  cursor: pointer;
+
+  text-transform: capitalize;
+
+  transition:
+    background-color 0.2s ease,
+    color 0.2s ease;
+}
+
+#theme-dropdown [role="menuitem"]:hover {
+  background-color: var(--hover-color);
+}
+
+#theme-dropdown [role="menuitem"]:focus-visible {
+  outline: 2px solid var(--accent-color);
+}
+
+#status {
+  margin-top: 2rem;
+
+  min-height: 24px;
+
+  font-size: 1.3rem;
+  font-weight: bold;
+
+  color: var(--accent-color);
+
+  text-align: center;
+}
+
+[hidden] {
+  display: none;
+}
