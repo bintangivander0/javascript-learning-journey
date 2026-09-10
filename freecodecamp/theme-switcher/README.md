@@ -6,8 +6,6 @@ Ilustrasi:
     <td>
       <img width="448" height="319" alt="image" src="https://github.com/user-attachments/assets/34916429-b748-4408-9794-44b3f6e73fd4" />
     </td>
-  </tr>
-  <tr>
     <td>
       <img width="449" height="320" alt="image" src="https://github.com/user-attachments/assets/4c3938e7-cfee-4055-be99-87eb76a5cce8" />
     </td>
