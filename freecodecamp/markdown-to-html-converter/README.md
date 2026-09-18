@@ -1,9 +1,8 @@
 # Markdown to HTML Converter
 
 <p align="center">
-  <img src="https://img.shields.io/badge/JavaScript-Certification%20Project-F7DF1E?logo=javascript&logoColor=000" alt="JavaScript Certification Project" />
-  <img src="https://img.shields.io/badge/freeCodeCamp-Project-0A0A23?logo=freecodecamp&logoColor=white" alt="freeCodeCamp Project" />
-  <img src="https://img.shields.io/badge/Regex-Markdown%20Parser-4B5563" alt="Regex Markdown Parser" />
+  <img width="463" height="328" alt="image" src="https://github.com/user-attachments/assets/9fac4c2a-09f5-42b0-b72e-4dd4bcffa18c" />
+  <img width="785" height="314" alt="image" src="https://github.com/user-attachments/assets/49d0220a-a592-4096-af5b-5edb5d73bef8" />
 </p>
 
 > **Milestone:** Certification Project pertama pada JavaScript Certification freeCodeCamp.
