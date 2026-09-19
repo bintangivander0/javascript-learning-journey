@@ -556,35 +556,3 @@ Beberapa property yang dapat Anda pelajari lebih lanjut antara lain `valueMissin
 > **Penjelasan tambahan:** Contoh lain pada object tersebut: `typeMismatch` dapat menjadi `true` ketika format nilai tidak sesuai dengan tipe input, `tooShort` dan `tooLong` berkaitan dengan batas panjang, sedangkan `rangeUnderflow` dan `rangeOverflow` berkaitan dengan batas nilai minimum dan maksimum.
 
 Setelah pelajaran ini, Anda disarankan mencoba sendiri contoh-contoh yang diberikan dan mengeksplorasi lebih banyak property validitas yang tersedia.
-
-## Pertanyaan
-
-Method mana dari Constraint Validation API yang digunakan untuk memeriksa apakah sebuah elemen input memenuhi seluruh aturan validasinya?
-
-`validateInput()`
-
-`checkValidity()`
-
-`isValid()`
-
-`testConstraints()`
-
-Apa tujuan method `setCustomValidity()` dalam validasi form?
-
-Untuk menetapkan style CSS khusus pada input yang tidak valid.
-
-Untuk membuat aturan validasi khusus.
-
-Untuk menampilkan pesan error khusus pada input yang tidak valid.
-
-Untuk mengganti validasi HTML bawaan.
-
-Property mana dari object `validity` yang menjadi `true` ketika field input yang wajib diisi dibiarkan kosong?
-
-`isEmpty`
-
-`required`
-
-`valueMissing`
-
-`invalidValue`
