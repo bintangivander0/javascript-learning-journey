@@ -2,8 +2,8 @@
 
 <table align="center">
   <tr>
-    <td><img src="assets/envelope-budgeter-surplus.png" alt="Envelope Budgeter saat budget masih tersisa" /></td>
-    <td><img src="assets/envelope-budgeter-deficit.png" alt="Envelope Budgeter saat pengeluaran melebihi budget" /></td>
+    <td><img width="574" height="455" alt="Cuplikan layar 2026-09-20 130923" src="https://github.com/user-attachments/assets/dec0b64a-7799-4efa-9bf2-5928ed5c87e2" /></td>
+    <td><img width="574" height="455" alt="Cuplikan layar 2026-09-20 130957" src="https://github.com/user-attachments/assets/82194754-26fd-4c5e-b1a9-6cf730368fad" /></td>
   </tr>
 </table>
 
