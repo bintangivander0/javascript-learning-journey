@@ -1,7 +1,7 @@
 # Build a Customer Complaint Form
 
 <p align="center">
-  ![alt text](image.png)
+  <img width="533" height="404" alt="image" src="https://github.com/user-attachments/assets/9d16f34e-8267-4f72-8afb-0bfe4dacb1bf" />
 </p>
 
 Lab ini membuat form keluhan pelanggan dengan **validasi menggunakan JavaScript**.
