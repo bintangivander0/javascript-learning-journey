@@ -1,7 +1,7 @@
 # Build a Drum Machine
 
 <p align="center">
-  <img src="assets/drum-machine.png" alt="Drum Machine Preview" width="520">
+  <img width="462" height="337" alt="image" src="https://github.com/user-attachments/assets/5eadb421-57c1-43b4-87d8-a185d4d75d8f" />
 </p>
 
 <p align="center">
