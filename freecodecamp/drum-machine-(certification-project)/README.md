@@ -72,8 +72,6 @@ drum-machine/
 ├── index.html
 ├── styles.css
 ├── script.js
-└── assets/
-    └── drum-machine.png
 ```
 
 ---
