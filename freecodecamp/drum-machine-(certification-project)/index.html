@@ -1,0 +1,65 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <title>Drum Machine</title>
+    <link rel="stylesheet" href="styles.css">
+  </head>
+  <body>
+    <div id="drum-machine">
+      <div id="pad-bank">
+        <button class="drum-pad" id="heater-1" type="button">
+          Q
+          <audio class="clip" id="Q" src="https://cdn.freecodecamp.org/curriculum/drum/Heater-1.mp3"></audio>
+        </button>
+        <button class="drum-pad" id="heater-2" type="button">
+          W
+          <audio class="clip" id="W" src="https://cdn.freecodecamp.org/curriculum/drum/Heater-2.mp3"></audio>
+        </button>
+        <button class="drum-pad" id="heater-3" type="button">
+          E
+          <audio class="clip" id="E" src="https://cdn.freecodecamp.org/curriculum/drum/Heater-3.mp3"></audio>
+        </button>
+        <button class="drum-pad" id="heater-4" type="button">
+          A
+          <audio class="clip" id="A" src="https://cdn.freecodecamp.org/curriculum/drum/Heater-4_1.mp3"></audio>
+        </button>
+        <button class="drum-pad" id="clap" type="button">
+          S
+          <audio class="clip" id="S" src="https://cdn.freecodecamp.org/curriculum/drum/Heater-6.mp3"></audio>
+        </button>
+        <button class="drum-pad" id="open-hh" type="button">
+          D
+          <audio class="clip" id="D" src="https://cdn.freecodecamp.org/curriculum/drum/Dsc_Oh.mp3"></audio>
+        </button>
+        <button class="drum-pad" id="kick-n-hat" type="button">
+          Z
+          <audio class="clip" id="Z" src="https://cdn.freecodecamp.org/curriculum/drum/Kick_n_Hat.mp3"></audio>
+        </button>
+        <button class="drum-pad" id="kick" type="button">
+          X
+          <audio class="clip" id="X" src="https://cdn.freecodecamp.org/curriculum/drum/RP4_KICK_1.mp3"></audio>
+        </button>
+        <button class="drum-pad" id="closed-hh" type="button">
+          C
+          <audio class="clip" id="C" src="https://cdn.freecodecamp.org/curriculum/drum/Cev_H2.mp3"></audio>
+        </button>
+      </div>
+      <p id="display"></p>
+      <div class="power">
+        <span>Power</span>
+        <label class="switch">
+          <input type="checkbox" id="power">
+          <span class="slider"><span>
+        </label>
+      </div>
+      <div class="volume-control">
+        <span>Volume</span>
+        <label for="volume">
+          <input id="volume" type="range" min="0" max="100" value="50">
+        </label>
+      </div>
+    </div>
+    <script src="script.js"></script>
+  </body>
+</html>
