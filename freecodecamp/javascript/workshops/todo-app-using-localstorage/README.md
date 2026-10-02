@@ -1,82 +1,192 @@
 # Build a Todo App Using Local Storage
 
-```{=html}
-<p align="center">
-```
-Todo application sederhana berbasis
-`<strong>`{=html}JavaScript`</strong>`{=html} yang menggunakan
-`<strong>`{=html}localStorage`</strong>`{=html} untuk menyimpan data
-task secara persisten di browser.
-```{=html}
-</p>
-```
-```{=html}
-<p align="center">
-```
-`<strong>`{=html}JavaScript`</strong>`{=html} ·
-`<strong>`{=html}DOM`</strong>`{=html} ·
-`<strong>`{=html}localStorage`</strong>`{=html} ·
-`<strong>`{=html}JSON`</strong>`{=html} ·
-`<strong>`{=html}CRUD`</strong>`{=html} · `<strong>`{=html}Array
-Methods`</strong>`{=html} · `<strong>`{=html}Event
-Handling`</strong>`{=html}
-```{=html}
-</p>
+Workshop ini membuat aplikasi **Todo** sederhana menggunakan HTML, CSS, dan JavaScript dengan `localStorage` sebagai tempat penyimpanan data task di browser.
+
+Project ini melatih bagaimana sebuah aplikasi dapat:
+
+```text
+menambahkan task
+↓
+menampilkan task
+↓
+mengubah task
+↓
+menghapus task
+↓
+menyimpan data secara persistent
 ```
 
-------------------------------------------------------------------------
+Konsep utama yang digunakan:
 
-## Tentang Project
-
-Project ini merupakan workshop **freeCodeCamp "Build a Todo App Using
-Local Storage"**.
-
-Workshop ini digunakan untuk memahami bagaimana data dari sebuah
-aplikasi web dapat disimpan di browser menggunakan `localStorage`.
-
-Aplikasi Todo memungkinkan pengguna untuk menambahkan task baru,
-mengubah task, menghapus task, serta menampilkan kembali task yang sudah
-tersimpan ketika halaman dimuat ulang.
-
-Berbeda dengan latihan sebelumnya yang lebih berfokus pada penggunaan
-`Map` dan `Set`, project ini mulai menggabungkan beberapa konsep
-JavaScript sekaligus, terutama **DOM manipulation, event handling, array
-methods, object, localStorage, JSON, dan CRUD**.
-
-Workshop ini terdiri dari **66 steps**, sehingga beberapa function yang
-sudah dibuat sebelumnya kembali digunakan, diubah, atau dikembangkan
-untuk memenuhi kebutuhan fitur berikutnya.
-
-------------------------------------------------------------------------
-
-## Fitur
-
--   Menambahkan task baru melalui form.
--   Menyimpan task ke `localStorage`.
--   Menampilkan task yang tersimpan ketika halaman dibuka kembali.
--   Mengubah task yang sudah ada.
--   Menghapus task.
--   Mencegah task dengan title kosong disimpan.
--   Membuat ID unik berdasarkan title dan waktu.
--   Menampilkan dialog konfirmasi ketika form ditutup dengan perubahan
-    yang belum disimpan.
--   Menyimpan seluruh task dalam bentuk JSON.
--   Mengambil kembali data JSON dari `localStorage`.
-
-------------------------------------------------------------------------
-
-## Struktur Data
-
-Data task disimpan sebagai array yang berisi object.
-
-``` js
-const taskData = JSON.parse(localStorage.getItem("data")) || [];
+```text
+JavaScript
+↓
+DOM
+↓
+Array
+↓
+Object
+↓
+CRUD
+↓
+JSON
+↓
+localStorage
+↓
+Event Handling
 ```
 
-Secara sederhana, struktur datanya dapat dibayangkan seperti:
+---
 
-``` text
+# Struktur HTML
+
+HTML sudah menyediakan struktur dasar aplikasi Todo.
+
+Secara sederhana:
+
+```text
+body
+│
+├── main
+│   │
+│   ├── h1
+│   │
+│   └── .todo-app
+│       │
+│       ├── #open-task-form-btn
+│       │
+│       ├── #task-form
+│       │   ├── #close-task-form-btn
+│       │   ├── #title-input
+│       │   ├── #date-input
+│       │   ├── #description-input
+│       │   └── #add-or-update-task-btn
+│       │
+│       ├── #confirm-close-dialog
+│       │   ├── #cancel-btn
+│       │   └── #discard-btn
+│       │
+│       └── #tasks-container
+```
+
+JavaScript nantinya mengambil elemen-elemen tersebut menggunakan `document.getElementById()`.
+
+---
+
+# Tombol Add New Task
+
+HTML menyediakan tombol:
+
+```html
+<button id="open-task-form-btn" class="btn large-btn">
+  Add New Task
+</button>
+```
+
+Tombol ini digunakan untuk membuka form ketika user ingin membuat task baru.
+
+JavaScript mengambil tombol tersebut:
+
+```js
+const openTaskFormBtn = document.getElementById("open-task-form-btn");
+```
+
+Kemudian event listener digunakan untuk merespons ketika tombol diklik.
+
+```js
+openTaskFormBtn.addEventListener("click", () =>
+  taskForm.classList.toggle("hidden")
+);
+```
+
+Mental model:
+
+```text
+User klik Add New Task
+↓
+click event
+↓
+class "hidden" di-toggle
+↓
+Form muncul
+```
+
+---
+
+# Task Form
+
+Form digunakan untuk memasukkan informasi task.
+
+Field yang tersedia:
+
+```text
+Title
+Date
+Description
+```
+
+HTML:
+
+```html
+<label class="task-form-label" for="title-input">Title</label>
+<input required type="text" class="form-control" id="title-input" value="" />
+
+<label class="task-form-label" for="date-input">Date</label>
+<input type="date" class="form-control" id="date-input" value="" />
+
+<label class="task-form-label" for="description-input">Description</label>
+<textarea class="form-control" id="description-input" cols="30" rows="5"></textarea>
+```
+
+JavaScript mengambil ketiga input tersebut:
+
+```js
+const titleInput = document.getElementById("title-input");
+const dateInput = document.getElementById("date-input");
+const descriptionInput = document.getElementById("description-input");
+```
+
+---
+
+# Task Object
+
+Data yang dimasukkan user nantinya dibuat menjadi sebuah object.
+
+Strukturnya:
+
+```text
+task object
+│
+├── id
+├── title
+├── date
+└── description
+```
+
+Contohnya:
+
+```js
+const taskObj = {
+  id: "learn-javascript-1720000000000",
+  title: "Learn JavaScript",
+  date: "2026-10-02",
+  description: "Study localStorage",
+};
+```
+
+Object digunakan untuk menyimpan informasi dari satu task.
+
+---
+
+# Array of Objects
+
+Karena aplikasi dapat memiliki banyak task, object tersebut disimpan dalam sebuah array.
+
+Secara sederhana:
+
+```text
 taskData
+│
 ├── task object
 │   ├── id
 │   ├── title
@@ -96,126 +206,205 @@ taskData
     └── description
 ```
 
-Array digunakan untuk menyimpan banyak task.
+Mental model:
 
-Setiap task disimpan sebagai object dengan property `id`, `title`,
-`date`, dan `description`.
+```text
+1 task
+↓
+Object
 
-------------------------------------------------------------------------
-
-## Struktur Project
-
-``` text
-build-a-todo-app-using-local-storage/
-├── index.html
-├── styles.css
-└── script.js
+Banyak task
+↓
+Array of Objects
 ```
 
-Pada workshop freeCodeCamp ini, fokus pengerjaan JavaScript dilakukan
-pada file `script.js`, sedangkan HTML dan CSS telah disediakan.
+---
 
-------------------------------------------------------------------------
+# Mengambil Data dari localStorage
 
-# JavaScript
+Data task diambil menggunakan:
 
-## Mengambil Elemen HTML
-
-Project dimulai dengan mengambil berbagai elemen HTML menggunakan
-`document.getElementById()`.
-
-``` js
-const taskForm = document.getElementById("task-form");
-const confirmCloseDialog = document.getElementById("confirm-close-dialog");
-const openTaskFormBtn = document.getElementById("open-task-form-btn");
-const closeTaskFormBtn = document.getElementById("close-task-form-btn");
-const addOrUpdateTaskBtn = document.getElementById("add-or-update-task-btn");
-const cancelBtn = document.getElementById("cancel-btn");
-const discardBtn = document.getElementById("discard-btn");
-const tasksContainer = document.getElementById("tasks-container");
-const titleInput = document.getElementById("title-input");
-const dateInput = document.getElementById("date-input");
-const descriptionInput = document.getElementById("description-input");
-```
-
-Setiap variable menyimpan reference ke element tertentu pada halaman.
-
-Dengan reference tersebut, JavaScript dapat mengubah isi, value, class,
-atau perilaku element melalui code.
-
-------------------------------------------------------------------------
-
-## Mengambil Data dari localStorage
-
-Data task diambil dari `localStorage` ketika JavaScript dijalankan.
-
-``` js
+```js
 const taskData = JSON.parse(localStorage.getItem("data")) || [];
 ```
 
-Ada beberapa proses yang terjadi pada satu baris ini:
+Ada beberapa proses dalam satu baris tersebut.
 
-``` text
+```text
 localStorage
-    ↓
+↓
 getItem("data")
-    ↓
+↓
 JSON.parse()
-    ↓
-Array task
+↓
+Array of Objects
 ```
 
 `localStorage.getItem("data")` mengambil data berdasarkan key `"data"`.
 
-Data yang disimpan di `localStorage` berbentuk string.
+Data yang tersimpan di `localStorage` berbentuk string.
 
-`JSON.parse()` mengubah string JSON kembali menjadi JavaScript value.
+Karena aplikasi membutuhkan JavaScript array kembali, string tersebut diubah menggunakan:
 
-Jika belum ada data yang tersimpan, `|| []` membuat `taskData`
-menggunakan array kosong.
-
-------------------------------------------------------------------------
-
-## Menyimpan Task yang Sedang Diedit
-
-Variable berikut digunakan untuk menyimpan task yang sedang diproses
-ketika mode edit digunakan.
-
-``` js
-let currentTask = {};
+```js
+JSON.parse()
 ```
 
-Pada awalnya `currentTask` merupakan object kosong.
+Jika belum ada data:
 
-Ketika pengguna memilih task untuk diedit, variable ini kemudian berisi
-object task tersebut.
+```js
+|| []
+```
 
-------------------------------------------------------------------------
+akan membuat `taskData` menjadi array kosong.
+
+---
+
+# `JSON.parse()`
+
+`JSON.parse()` digunakan untuk mengubah JSON string kembali menjadi JavaScript value.
+
+Contoh:
+
+```js
+const data = JSON.parse(localStorage.getItem("data"));
+```
+
+Mental model:
+
+```text
+JSON String
+↓
+JSON.parse()
+↓
+JavaScript Array / Object
+```
+
+---
+
+# `JSON.stringify()`
+
+Ketika JavaScript value ingin disimpan ke `localStorage`, data perlu diubah menjadi JSON string.
+
+Contohnya:
+
+```js
+localStorage.setItem("data", JSON.stringify(taskData));
+```
+
+Mental model:
+
+```text
+JavaScript Array
+↓
+JSON.stringify()
+↓
+JSON String
+↓
+localStorage
+```
+
+---
+
+# Hubungan `JSON.parse()` dan `JSON.stringify()`
+
+Kedua method tersebut bekerja berlawanan arah.
+
+```text
+MENYIMPAN
+
+Array / Object
+↓
+JSON.stringify()
+↓
+String
+↓
+localStorage
+```
+
+Sedangkan:
+
+```text
+MENGAMBIL
+
+localStorage
+↓
+String
+↓
+JSON.parse()
+↓
+Array / Object
+```
+
+Ini menjadi salah satu pola utama dalam project.
+
+---
 
 # Function `removeSpecialChars()`
 
-Function ini digunakan untuk membersihkan karakter tertentu dari value.
+Function ini digunakan untuk membersihkan karakter tertentu dari sebuah value.
 
-``` js
+```js
 const removeSpecialChars = (val) => {
   return val.trim().replace(/[^A-Za-z0-9\-\s]/g, "");
 };
 ```
 
-`trim()` menghapus whitespace pada bagian awal dan akhir string.
+`trim()` menghapus whitespace di awal dan akhir string.
 
-`replace()` digunakan bersama regular expression untuk menghapus
-karakter yang tidak termasuk huruf, angka, tanda `-`, atau whitespace.
+Sedangkan `replace()` digunakan bersama regular expression untuk menghapus karakter yang tidak sesuai pola.
 
-Function ini kemudian digunakan saat membuat ID task.
+Function ini nantinya digunakan ketika membuat ID task.
 
-------------------------------------------------------------------------
+---
+
+# Membuat ID Task
+
+Setiap task membutuhkan ID.
+
+ID dibuat menggunakan:
+
+```js
+id: `${removeSpecialChars(titleInput.value).toLowerCase().split(" ").join("-")}-${Date.now()}`,
+```
+
+Secara sederhana:
+
+```text
+Title
+↓
+removeSpecialChars()
+↓
+toLowerCase()
+↓
+split(" ")
+↓
+join("-")
+↓
+Date.now()
+↓
+ID
+```
+
+Contohnya:
+
+```text
+Learn JavaScript
+↓
+learn-javascript
+↓
+learn-javascript-<timestamp>
+```
+
+`Date.now()` digunakan sebagai bagian dari ID agar task mendapatkan nilai yang berbeda berdasarkan waktu pembuatan.
+
+---
 
 # Function `addOrUpdateTask()`
 
 Function utama untuk menambahkan atau memperbarui task adalah:
 
-``` js
+```js
 const addOrUpdateTask = () => {
   ...
 };
@@ -223,72 +412,96 @@ const addOrUpdateTask = () => {
 
 Function ini menangani dua kondisi:
 
-``` text
-                addOrUpdateTask()
-                       ↓
-              ┌────────┴────────┐
-              ↓                 ↓
-        Task baru          Task lama
-              ↓                 ↓
-          Add Task         Update Task
+```text
+addOrUpdateTask()
+        ↓
+   ┌────┴────┐
+   ↓         ↓
+  Add      Update
+   ↓         ↓
+Task baru  Task lama
 ```
 
-------------------------------------------------------------------------
+---
 
-## Validasi Title
+# Validasi Title
 
 Sebelum task diproses, title diperiksa terlebih dahulu.
 
-``` js
+```js
 if (!titleInput.value.trim()) {
   alert("Please provide a title");
   return;
 }
 ```
 
-`trim()` digunakan untuk memastikan input yang hanya berisi whitespace
-dianggap kosong.
-
 Jika title kosong, function dihentikan menggunakan `return`.
 
-------------------------------------------------------------------------
+Mental model:
 
-## Mencari Task yang Sedang Diproses
-
-Task dicari berdasarkan `id`.
-
-``` js
-const dataArrIndex = taskData.findIndex((item) => item.id === currentTask.id);
+```text
+Title kosong?
+↓
+YA
+↓
+alert()
+↓
+return
+↓
+Task tidak dibuat
 ```
 
-`findIndex()` mencari index element pertama yang memenuhi kondisi.
+---
 
-Dalam kasus ini, JavaScript membandingkan:
+# Mencari Task dengan `findIndex()`
 
-``` text
-item.id
-   ↓
-currentTask.id
+Program perlu mengetahui apakah task yang sedang diproses merupakan task baru atau task lama.
+
+Untuk itu digunakan:
+
+```js
+const dataArrIndex = taskData.findIndex(
+  (item) => item.id === currentTask.id
+);
 ```
 
-Jika ditemukan, index task dikembalikan.
+`findIndex()` mencari index element yang memenuhi kondisi.
 
-Jika tidak ditemukan, hasilnya adalah:
+Jika task tidak ditemukan:
 
-``` text
+```text
 -1
 ```
 
-Nilai tersebut kemudian digunakan untuk membedakan mode **add** dan
-**update**.
+Jika ditemukan:
 
-------------------------------------------------------------------------
+```text
+0
+1
+2
+3
+...
+```
 
-## Membuat Object Task
+Mental model:
 
-Object baru dibuat menggunakan data dari form.
+```text
+findIndex()
+│
+├── -1
+│   → task belum ada
+│
+└── index
+    → task ditemukan
+```
 
-``` js
+---
+
+# Membuat Task Object
+
+Setelah validasi dan pencarian index selesai, object task dibuat.
+
+```js
 const taskObj = {
   id: `${removeSpecialChars(titleInput.value).toLowerCase().split(" ").join("-")}-${Date.now()}`,
   title: titleInput.value,
@@ -297,97 +510,119 @@ const taskObj = {
 };
 ```
 
-Object tersebut memiliki empat property:
+Object tersebut mengambil data dari form.
 
-``` text
-id
+```text
+titleInput.value
+↓
 title
+
+dateInput.value
+↓
 date
+
+descriptionInput.value
+↓
 description
 ```
 
-ID dibuat dari title yang telah dibersihkan dan waktu saat task dibuat.
+---
 
-`Date.now()` menghasilkan nilai waktu saat function dijalankan dan
-digunakan sebagai bagian dari ID.
+# Menambahkan Task Baru
 
-------------------------------------------------------------------------
+Jika task belum ditemukan:
 
-## Menambahkan Task Baru
-
-Jika `dataArrIndex` bernilai `-1`, berarti task belum ditemukan.
-
-``` js
+```js
 if (dataArrIndex === -1) {
   taskData.unshift(taskObj);
 }
 ```
 
-`unshift()` menambahkan task ke bagian awal array.
+`unshift()` menambahkan object ke bagian awal array.
 
-------------------------------------------------------------------------
+Mental model:
 
-## Memperbarui Task
+```text
+taskData
 
-Jika task sudah ditemukan, element array pada index tersebut diganti.
+Task A
+Task B
 
-``` js
+↓ unshift(Task C)
+
+Task C
+Task A
+Task B
+```
+
+---
+
+# Memperbarui Task
+
+Jika task sudah ditemukan:
+
+```js
 else {
   taskData[dataArrIndex] = taskObj;
 }
 ```
 
-Dengan cara tersebut, task lama digantikan oleh object task yang baru.
+Object task lama diganti dengan object baru pada index yang sama.
 
-------------------------------------------------------------------------
+Mental model:
 
-## Menyimpan Data ke localStorage
+```text
+taskData[index]
+↓
+task lama
 
-Setelah task ditambahkan atau diperbarui, data disimpan kembali.
+        ↓ update
 
-``` js
+taskData[index]
+↓
+task baru
+```
+
+---
+
+# Menyimpan Task
+
+Setelah task ditambahkan atau diperbarui:
+
+```js
 localStorage.setItem("data", JSON.stringify(taskData));
 ```
 
-`JSON.stringify()` mengubah JavaScript array menjadi string JSON.
-
-Kemudian `localStorage.setItem()` menyimpan string tersebut dengan key
-`"data"`.
-
 Alurnya:
 
-``` text
-JavaScript Array
-       ↓
+```text
+taskData
+↓
 JSON.stringify()
-       ↓
-JSON String
-       ↓
-localStorage.setItem()
+↓
+JSON string
+↓
+localStorage
 ```
-
-------------------------------------------------------------------------
-
-## Memperbarui Tampilan dan Mereset Form
 
 Setelah data tersimpan:
 
-``` js
+```js
 updateTaskContainer();
 reset();
 ```
 
-`updateTaskContainer()` memperbarui tampilan daftar task.
+`updateTaskContainer()` memperbarui tampilan.
 
 `reset()` mengembalikan form ke kondisi awal.
 
-------------------------------------------------------------------------
+---
 
 # Function `updateTaskContainer()`
 
-Function ini bertanggung jawab menampilkan seluruh task ke halaman.
+Function ini bertugas menampilkan task ke halaman.
 
-``` js
+```js
 const updateTaskContainer = () => {
   tasksContainer.innerHTML = "";
 
@@ -405,58 +640,79 @@ const updateTaskContainer = () => {
 };
 ```
 
-------------------------------------------------------------------------
+Function ini menghubungkan data JavaScript dengan HTML.
 
-## Mengosongkan Container
+---
 
-Sebelum task ditampilkan kembali:
+# Mengosongkan Container
 
-``` js
+Sebelum task ditampilkan:
+
+```js
 tasksContainer.innerHTML = "";
 ```
 
-Container dikosongkan terlebih dahulu agar daftar tidak ditambahkan
-berulang kali.
+Container dikosongkan terlebih dahulu.
 
-------------------------------------------------------------------------
+Tujuannya agar task tidak ditambahkan berkali-kali ketika function dipanggil kembali.
 
-## `forEach()` pada Array
+Mental model:
 
-Setiap task diproses menggunakan:
+```text
+Data berubah
+↓
+Container dikosongkan
+↓
+Data dirender ulang
+```
 
-``` js
+---
+
+# `forEach()` dan Object Destructuring
+
+Task diproses menggunakan:
+
+```js
 taskData.forEach(({id, title, date, description}) => {
   ...
 });
 ```
 
-Di sini digunakan **object destructuring**.
+Di sini digunakan `forEach()` untuk memproses setiap task.
 
-Daripada menulis:
+Selain itu terdapat **object destructuring**:
 
-``` text
+```js
+{id, title, date, description}
+```
+
+Property object langsung diambil menjadi variable.
+
+Tanpa destructuring, secara konsep kita bisa membayangkan:
+
+```text
 item.id
 item.title
 item.date
 item.description
 ```
 
-property langsung diambil menjadi variable:
+Dengan destructuring:
 
-``` text
+```text
 id
 title
 date
 description
 ```
 
-------------------------------------------------------------------------
+---
 
-## Template Literal
+# Template Literal
 
-HTML task dibentuk menggunakan template literal:
+HTML task dibuat menggunakan template literal:
 
-``` js
+```js
 `
   <div class="task" id="${id}">
     ...
@@ -464,158 +720,249 @@ HTML task dibentuk menggunakan template literal:
 `
 ```
 
-Nilai JavaScript dapat dimasukkan ke dalam template literal menggunakan
-`${...}`.
+Nilai JavaScript dapat dimasukkan ke dalam template literal menggunakan:
 
-------------------------------------------------------------------------
+```js
+${...}
+```
+
+Contohnya:
+
+```js
+${title}
+```
+
+akan mengambil nilai dari variable `title`.
+
+---
 
 # Function `deleteTask()`
 
 Function ini digunakan untuk menghapus task.
 
-``` js
+```js
 const deleteTask = (buttonEl) => {
   ...
 };
 ```
 
-Function menerima `buttonEl`, yaitu element tombol Delete yang diklik.
+Function menerima parameter:
 
-------------------------------------------------------------------------
+```text
+buttonEl
+```
 
-## Mencari Index Task
+yang merupakan tombol Delete yang diklik.
 
-Task yang akan dihapus dicari berdasarkan ID parent element tombol.
+---
 
-``` js
+# Mencari Task yang Akan Dihapus
+
+Task dicari berdasarkan ID parent element tombol.
+
+```js
 const dataArrIndex = taskData.findIndex(
   (item) => item.id === buttonEl.parentElement.id
 );
 ```
 
-`buttonEl.parentElement` mengarah ke `<div class="task">` yang berisi
-tombol tersebut.
+`buttonEl.parentElement` mengarah ke:
 
-ID dari parent tersebut kemudian dibandingkan dengan ID task pada array.
+```text
+<div class="task">
+```
 
-------------------------------------------------------------------------
+ID dari element tersebut kemudian dibandingkan dengan ID task dalam array.
 
-## Menghapus dari Tampilan
+Mental model:
 
-Element task dihapus dari DOM:
+```text
+Delete button
+↓
+parentElement
+↓
+task ID
+↓
+findIndex()
+↓
+task index
+```
 
-``` js
+---
+
+# Menghapus Task dari DOM
+
+Setelah task ditemukan, element task dihapus dari halaman.
+
+```js
 buttonEl.parentElement.remove();
 ```
 
-------------------------------------------------------------------------
+Ini menghapus element dari DOM.
 
-## Menghapus dari Array
+---
 
-Task juga harus dihapus dari `taskData`.
+# Menghapus Task dari Array
 
-``` js
+Task juga harus dihapus dari array.
+
+```js
 taskData.splice(dataArrIndex, 1);
 ```
 
-`splice()` digunakan untuk menghapus element dari array berdasarkan
-index.
+`splice()` digunakan untuk menghapus element berdasarkan index.
 
-Angka `1` menunjukkan bahwa satu element dihapus.
+Angka `1` berarti satu element dihapus.
 
-------------------------------------------------------------------------
+Mental model:
 
-## Memperbarui localStorage
+```text
+taskData
+↓
+findIndex()
+↓
+index task
+↓
+splice(index, 1)
+↓
+task terhapus
+```
 
-Setelah array berubah, `localStorage` juga diperbarui.
+---
 
-``` js
+# Menyimpan Perubahan Setelah Delete
+
+Setelah task dihapus dari array, `localStorage` juga harus diperbarui.
+
+```js
 localStorage.setItem("data", JSON.stringify(taskData));
 ```
 
-Dengan begitu data yang sudah dihapus tidak akan muncul kembali setelah
-halaman dimuat ulang.
+Jika tidak dilakukan, task yang sudah dihapus dari halaman masih dapat muncul kembali setelah browser melakukan reload.
 
-------------------------------------------------------------------------
+---
 
 # Function `editTask()`
 
-Function ini digunakan untuk mengisi kembali form dengan data task yang
-ingin diedit.
+Function ini digunakan ketika user ingin mengubah task.
 
-``` js
+```js
 const editTask = (buttonEl) => {
   ...
 };
 ```
 
-Task dicari menggunakan cara yang sama seperti pada `deleteTask()`.
+Task dicari menggunakan ID parent element.
 
-``` js
+```js
 const dataArrIndex = taskData.findIndex(
   (item) => item.id === buttonEl.parentElement.id
 );
 ```
 
-------------------------------------------------------------------------
+---
 
-## Menyimpan Task Aktif
+# `currentTask`
 
-Task yang dipilih disimpan ke `currentTask`.
+Variable berikut digunakan untuk menyimpan task yang sedang diedit.
 
-``` js
+```js
+let currentTask = {};
+```
+
+Ketika user memilih Edit:
+
+```js
 currentTask = taskData[dataArrIndex];
 ```
 
-Variable tersebut kemudian digunakan untuk mengetahui task mana yang
-sedang diedit.
+Sekarang `currentTask` berisi task yang sedang diproses.
 
-------------------------------------------------------------------------
+Mental model:
 
-## Mengisi Form
+```text
+User klik Edit
+↓
+Cari task
+↓
+currentTask = task tersebut
+↓
+Form diisi
+↓
+User mengubah data
+↓
+Submit
+```
 
-Value form diisi dari object task:
+---
 
-``` js
+# Mengisi Form Saat Edit
+
+Data dari `currentTask` dimasukkan kembali ke form.
+
+```js
 titleInput.value = currentTask.title;
 dateInput.value = currentTask.date;
 descriptionInput.value = currentTask.description;
 ```
 
-Dengan demikian data task lama muncul kembali di dalam form.
+Dengan demikian user dapat melihat dan mengubah data task sebelumnya.
 
-------------------------------------------------------------------------
+---
 
-## Mengubah Tombol Menjadi Update
+# Mengubah Tombol Menjadi Update
 
-Text tombol diubah:
+Ketika mode edit aktif:
 
-``` js
+```js
 addOrUpdateTaskBtn.innerText = "Update Task";
 ```
 
-Hal tersebut memberikan tanda bahwa form sedang berada dalam mode
-update.
+Teks tombol berubah dari:
 
-------------------------------------------------------------------------
+```text
+Add Task
+```
 
-## Membuka Form
+menjadi:
 
-Class `hidden` di-toggle:
+```text
+Update Task
+```
 
-``` js
+Hal tersebut memberikan tanda bahwa form sedang digunakan untuk memperbarui task.
+
+---
+
+# Menampilkan Form Edit
+
+Form ditampilkan menggunakan:
+
+```js
 taskForm.classList.toggle("hidden");
 ```
 
-Form kemudian ditampilkan.
+Class `hidden` digunakan oleh CSS untuk menyembunyikan form.
 
-------------------------------------------------------------------------
+Secara sederhana:
+
+```text
+hidden ada
+↓
+form tersembunyi
+
+hidden di-toggle
+↓
+form tampil
+```
+
+---
 
 # Function `reset()`
 
 Function `reset()` mengembalikan form ke kondisi awal.
 
-``` js
+```js
 const reset = () => {
   addOrUpdateTaskBtn.innerText = "Add Task";
   titleInput.value = "";
@@ -626,71 +973,106 @@ const reset = () => {
 };
 ```
 
-Beberapa hal dilakukan sekaligus:
+Beberapa hal terjadi:
 
-``` text
+```text
 Button
-  ↓
+↓
 Add Task
 
-Input
-  ↓
-Kosong
+Title
+↓
+kosong
+
+Date
+↓
+kosong
+
+Description
+↓
+kosong
 
 Form
-  ↓
-Hidden
+↓
+hidden
 
 currentTask
-  ↓
+↓
 {}
 ```
 
-------------------------------------------------------------------------
+---
 
-# Menampilkan Data Saat Halaman Dibuka
+# Menampilkan Task Saat Halaman Dibuka
 
-Bagian berikut memastikan task yang sudah tersimpan ditampilkan ketika
-halaman dimuat.
+Ketika halaman dimuat, program memeriksa apakah ada data task.
 
-``` js
+```js
 if (taskData.length) {
   updateTaskContainer();
 }
 ```
 
-Jika array `taskData` memiliki data, `updateTaskContainer()` dipanggil.
+Jika array memiliki data, function `updateTaskContainer()` dipanggil.
 
-Dengan demikian task yang sebelumnya disimpan di `localStorage` dapat
-muncul kembali.
+Mental model:
 
-------------------------------------------------------------------------
-
-# Event Listener
-
-Project menggunakan event listener untuk merespons interaksi pengguna.
-
-## Membuka Form
-
-``` js
-openTaskFormBtn.addEventListener("click", () =>
-  taskForm.classList.toggle("hidden")
-);
+```text
+Halaman dibuka
+↓
+localStorage.getItem()
+↓
+JSON.parse()
+↓
+taskData
+↓
+Ada task?
+│
+├── TIDAK
+│   → tidak melakukan render
+│
+└── YA
+    ↓
+    updateTaskContainer()
 ```
 
-Ketika tombol Add New Task diklik, class `hidden` di-toggle.
+---
 
-------------------------------------------------------------------------
+# Confirm Close Dialog
 
-## Menutup Form
+Project juga memiliki dialog untuk memastikan user benar-benar ingin membuang perubahan.
 
-Tombol close memiliki logic tambahan karena form dapat berisi perubahan
-yang belum disimpan.
+HTML menyediakan:
 
-``` js
+```html
+<dialog id="confirm-close-dialog">
+  <form method="dialog">
+    <p class="discard-message-text">Discard unsaved changes?</p>
+
+    <div class="confirm-close-dialog-btn-container">
+      <button id="cancel-btn" class="btn">
+        Cancel
+      </button>
+
+      <button id="discard-btn" class="btn">
+        Discard
+      </button>
+    </div>
+  </form>
+</dialog>
+```
+
+Dialog ini digunakan ketika user menutup form setelah melakukan perubahan yang belum disimpan.
+
+---
+
+# Menutup Form
+
+Ketika tombol close diklik:
+
+```js
 closeTaskFormBtn.addEventListener("click", () => {
-  const formInputsContainValues =
-    titleInput.value || dateInput.value || descriptionInput.value;
+  const formInputsContainValues = titleInput.value || dateInput.value || descriptionInput.value;
 
   const formInputValuesUpdated =
     titleInput.value !== currentTask.title ||
@@ -705,73 +1087,64 @@ closeTaskFormBtn.addEventListener("click", () => {
 });
 ```
 
-Logic tersebut membedakan antara:
+Logic tersebut membedakan dua kondisi:
 
-``` text
+```text
 Tidak ada perubahan
-       ↓
-     reset()
+↓
+reset()
 
 Ada perubahan yang belum disimpan
-       ↓
+↓
 showModal()
 ```
 
-------------------------------------------------------------------------
+---
 
-# Confirm Close Dialog
+# Cancel
 
-Jika terdapat perubahan yang belum disimpan, dialog konfirmasi
-ditampilkan.
+Tombol Cancel hanya menutup dialog.
 
-``` js
-confirmCloseDialog.showModal();
+```js
+cancelBtn.addEventListener("click", () =>
+  confirmCloseDialog.close()
+);
 ```
 
-Dialog tersebut memberikan dua pilihan:
+Perubahan pada form tidak langsung dibuang.
 
-``` text
-Cancel
-   ↓
-Tetap di form
+---
 
-Discard
-   ↓
-Buang perubahan
-```
+# Discard
 
-------------------------------------------------------------------------
+Tombol Discard digunakan untuk membuang perubahan.
 
-## Cancel
-
-``` js
-cancelBtn.addEventListener("click", () => confirmCloseDialog.close());
-```
-
-`close()` digunakan untuk menutup dialog.
-
-Perubahan pada form tidak dibuang.
-
-------------------------------------------------------------------------
-
-## Discard
-
-``` js
+```js
 discardBtn.addEventListener("click", () => {
   confirmCloseDialog.close();
   reset();
 });
 ```
 
-Dialog ditutup dan form di-reset.
+Alurnya:
 
-------------------------------------------------------------------------
+```text
+Discard
+↓
+dialog ditutup
+↓
+reset()
+↓
+form kembali ke kondisi awal
+```
+
+---
 
 # Submit Form
 
-Form memiliki event listener:
+Form menggunakan event `submit`.
 
-``` js
+```js
 taskForm.addEventListener("submit", (e) => {
   e.preventDefault();
 
@@ -779,578 +1152,580 @@ taskForm.addEventListener("submit", (e) => {
 });
 ```
 
-`preventDefault()` mencegah browser menjalankan perilaku submit form
-secara default.
+`preventDefault()` digunakan agar browser tidak menjalankan perilaku submit form secara default.
 
 Setelah itu:
 
-``` js
+```js
 addOrUpdateTask();
 ```
 
-dipanggil untuk menjalankan logic penambahan atau pembaruan task.
+dipanggil.
 
-------------------------------------------------------------------------
+Function tersebut kemudian menentukan apakah data akan ditambahkan atau diperbarui.
 
-# Alur CRUD
+---
 
-Workshop ini memperlihatkan pola CRUD melalui Todo App.
+# CRUD pada Todo App
 
-``` text
+Workshop ini memperlihatkan konsep CRUD secara langsung.
+
+```text
 CREATE
-  ↓
+↓
 addOrUpdateTask()
-  ↓
+↓
 taskData.unshift()
-  ↓
+↓
 localStorage.setItem()
 
 READ
-  ↓
+↓
 localStorage.getItem()
-  ↓
+↓
 JSON.parse()
-  ↓
+↓
 updateTaskContainer()
 
 UPDATE
-  ↓
+↓
 findIndex()
-  ↓
+↓
 taskData[dataArrIndex] = taskObj
-  ↓
+↓
 localStorage.setItem()
 
 DELETE
-  ↓
+↓
 findIndex()
-  ↓
-taskData.splice()
-  ↓
+↓
+splice()
+↓
 localStorage.setItem()
 ```
 
-------------------------------------------------------------------------
+---
 
-# Hubungan Array, Object, JSON, dan localStorage
+# Alur Data
 
-Bagian yang paling penting dari workshop ini adalah memahami bahwa
-beberapa jenis data bekerja bersama.
+Bagian yang paling penting dari project ini adalah memahami bagaimana data bergerak.
 
-``` text
+Ketika membuat task:
+
+```text
+Form
+↓
+Input value
+↓
 Task Object
-    ↓
-Array of Objects
-    ↓
-JSON.stringify()
-    ↓
-String
-    ↓
-localStorage
-```
-
-Ketika data ingin digunakan kembali:
-
-``` text
-localStorage
-    ↓
-JSON String
-    ↓
-JSON.parse()
-    ↓
-Array of Objects
-    ↓
-JavaScript
-```
-
-------------------------------------------------------------------------
-
-# Konsep JavaScript yang Dilatih
-
-  -----------------------------------------------------------------------
-  Konsep                              Digunakan untuk
-  ----------------------------------- -----------------------------------
-  DOM                                 Mengakses dan mengubah element HTML
-
-  `getElementById()`                  Mengambil element berdasarkan ID
-
-  `addEventListener()`                Menangani event pengguna
-
-  `localStorage`                      Menyimpan data di browser
-
-  `setItem()`                         Menyimpan key-value ke localStorage
-
-  `getItem()`                         Mengambil data dari localStorage
-
-  `JSON.stringify()`                  Mengubah JavaScript value menjadi
-                                      JSON string
-
-  `JSON.parse()`                      Mengubah JSON string kembali
-                                      menjadi JavaScript value
-
-  Array                               Menyimpan banyak task
-
-  Object                              Menyimpan data setiap task
-
-  `findIndex()`                       Mencari index task
-
-  `forEach()`                         Memproses setiap task
-
-  `unshift()`                         Menambahkan task di awal array
-
-  `splice()`                          Menghapus task dari array
-
-  Object Destructuring                Mengambil property object
-
-  Template Literal                    Membentuk HTML secara dinamis
-
-  `Date.now()`                        Membantu membuat ID unik
-
-  `classList.toggle()`                Menampilkan atau menyembunyikan
-                                      form
-
-  `preventDefault()`                  Mencegah perilaku default submit
-
-  `showModal()`                       Menampilkan dialog
-
-  `return`                            Menghentikan atau mengembalikan
-                                      hasil function
-  -----------------------------------------------------------------------
-
-------------------------------------------------------------------------
-
-# Hal yang Saya Pelajari
-
-## 1. localStorage Menyimpan String
-
-`localStorage` tidak menyimpan JavaScript array atau object secara
-langsung.
-
-Karena itu data perlu diubah menjadi JSON string terlebih dahulu:
-
-``` js
-localStorage.setItem("data", JSON.stringify(taskData));
-```
-
-Kemudian saat digunakan kembali:
-
-``` js
-const taskData = JSON.parse(localStorage.getItem("data")) || [];
-```
-
-Pola yang perlu saya ingat:
-
-``` text
-Simpan:
-JavaScript Value
 ↓
-JSON.stringify()
-↓
-localStorage
-
-Ambil:
-localStorage
-↓
-JSON.parse()
-↓
-JavaScript Value
-```
-
-------------------------------------------------------------------------
-
-## 2. CRUD Tidak Berdiri Sendiri
-
-CRUD ternyata bukan hanya empat function terpisah.
-
-Dalam project ini CRUD melibatkan beberapa konsep sekaligus:
-
-``` text
-CRUD
- ↓
 Array
- ↓
-Object
- ↓
-findIndex()
- ↓
-splice()
- ↓
-localStorage
- ↓
-DOM
-```
-
-Karena itu perubahan pada satu bagian dapat memengaruhi bagian lain.
-
-------------------------------------------------------------------------
-
-## 3. Function Dapat Saling Bekerja Sama
-
-Workshop ini membuat saya melihat bahwa function tidak selalu berdiri
-sendiri.
-
-Contohnya:
-
-``` text
-addOrUpdateTask()
-       ↓
-updateTaskContainer()
-       ↓
-reset()
-```
-
-Sementara:
-
-``` text
-editTask()
-       ↓
-currentTask
-       ↓
-addOrUpdateTask()
-```
-
-Jadi satu fitur dapat menggunakan beberapa function yang sudah dibuat
-sebelumnya.
-
-------------------------------------------------------------------------
-
-## 4. `currentTask` Menyimpan State
-
-Variable:
-
-``` js
-let currentTask = {};
-```
-
-digunakan untuk mengetahui task yang sedang diedit.
-
-Ketika edit dilakukan:
-
-``` js
-currentTask = taskData[dataArrIndex];
-```
-
-Kemudian `currentTask.id` digunakan untuk menemukan kembali task
-tersebut ketika form disubmit.
-
-Saya mulai memahami bahwa variable tertentu dapat digunakan untuk
-menyimpan **state**, yaitu informasi tentang kondisi program saat ini.
-
-------------------------------------------------------------------------
-
-## 5. `findIndex()` Penting untuk CRUD
-
-Pada project ini `findIndex()` digunakan untuk menemukan task
-berdasarkan ID.
-
-``` js
-const dataArrIndex = taskData.findIndex(
-  (item) => item.id === currentTask.id
-);
-```
-
-Hasilnya dapat digunakan untuk:
-
-``` text
--1
 ↓
-Task belum ada
-
-0, 1, 2, ...
-↓
-Task ditemukan
-```
-
-Konsep ini digunakan baik untuk add/update maupun delete.
-
-------------------------------------------------------------------------
-
-## 6. Array Berisi Object
-
-`taskData` bukan sekadar array biasa.
-
-Strukturnya:
-
-``` text
-Array
- ↓
-Object
- ├── id
- ├── title
- ├── date
- └── description
-```
-
-Memahami struktur ini membantu saya memahami mengapa code seperti:
-
-``` js
-taskData[dataArrIndex].title
-```
-
-dapat digunakan.
-
-------------------------------------------------------------------------
-
-## 7. Update Memerlukan Identitas Data
-
-Untuk mengubah task, program perlu mengetahui task mana yang akan
-diubah.
-
-Project ini menggunakan:
-
-``` js
-id
-```
-
-sebagai identitas task.
-
-Alurnya:
-
-``` text
-Button Edit
-    ↓
-Parent ID
-    ↓
-findIndex()
-    ↓
-Task ditemukan
-    ↓
-currentTask
-    ↓
-Update
-```
-
-------------------------------------------------------------------------
-
-## 8. Delete Harus Mengubah Dua Tempat
-
-Ketika task dihapus, bukan hanya tampilan yang harus berubah.
-
-DOM:
-
-``` js
-buttonEl.parentElement.remove();
-```
-
-dan data:
-
-``` js
-taskData.splice(dataArrIndex, 1);
-```
-
-kemudian `localStorage` juga harus diperbarui.
-
-Jika salah satu bagian tidak diperbarui, data aplikasi dapat menjadi
-tidak sinkron.
-
-------------------------------------------------------------------------
-
-## 9. Event Membuat Aplikasi Interaktif
-
-Aplikasi mulai terasa seperti aplikasi nyata karena JavaScript merespons
-tindakan pengguna.
-
-Contohnya:
-
-``` text
-Click
- ↓
-Event Listener
- ↓
-Function
- ↓
-Perubahan DOM / Data
-```
-
-------------------------------------------------------------------------
-
-# Alur Lengkap Aplikasi
-
-``` text
-User
- ↓
-Add New Task
- ↓
-Form muncul
- ↓
-Isi title/date/description
- ↓
-Submit
- ↓
-addOrUpdateTask()
- ↓
-Buat task object
- ↓
-Masukkan ke taskData
- ↓
 JSON.stringify()
- ↓
+↓
 localStorage
- ↓
-updateTaskContainer()
- ↓
-Task tampil
 ```
 
 Ketika halaman dibuka kembali:
 
-``` text
-Browser
- ↓
+```text
 localStorage
- ↓
-getItem("data")
- ↓
+↓
+getItem()
+↓
 JSON.parse()
- ↓
-taskData
- ↓
-updateTaskContainer()
- ↓
-Task tampil kembali
+↓
+Array
+↓
+Object
+↓
+DOM
 ```
 
-Ketika task diedit:
+Mental model utama:
 
-``` text
-Edit
- ↓
-editTask()
- ↓
-currentTask
- ↓
-Form terisi
- ↓
-Submit
- ↓
-findIndex()
- ↓
-Replace object
- ↓
+```text
+FORM
+↓
+OBJECT
+↓
+ARRAY
+↓
+JSON
+↓
 localStorage
- ↓
+↓
+JSON
+↓
+ARRAY
+↓
+DOM
+```
+
+---
+
+# Hubungan Function
+
+Project ini mulai menunjukkan bahwa function dapat saling bekerja sama.
+
+Contohnya:
+
+```text
+addOrUpdateTask()
+│
+├── findIndex()
+├── membuat task object
+├── unshift() / update array
+├── JSON.stringify()
+├── localStorage.setItem()
+│
+├── updateTaskContainer()
+│
+└── reset()
+```
+
+Sedangkan saat edit:
+
+```text
+editTask()
+↓
+currentTask
+↓
+form
+↓
+submit
+↓
+addOrUpdateTask()
+↓
+findIndex()
+↓
+update task
+```
+
+Artinya sebuah function tidak selalu bekerja sendirian.
+
+---
+
+# State dengan `currentTask`
+
+Variable:
+
+```js
+let currentTask = {};
+```
+
+digunakan sebagai state sederhana untuk mengetahui task yang sedang diedit.
+
+Ketika tidak ada task yang sedang diedit:
+
+```js
+currentTask = {};
+```
+
+Ketika user memilih Edit:
+
+```js
+currentTask = taskData[dataArrIndex];
+```
+
+Setelah selesai:
+
+```js
+currentTask = {};
+```
+
+Mental model:
+
+```text
+Tidak sedang edit
+↓
+{}
+
+User klik Edit
+↓
+currentTask = task
+
+User selesai
+↓
+{}
+```
+
+---
+
+# Hubungan HTML, CSS, dan JavaScript
+
+Project ini memperlihatkan hubungan ketiga bagian utama web development.
+
+```text
+HTML
+↓
+menyediakan struktur
+↓
+Form
+Task container
+Dialog
+Button
+```
+
+```text
+CSS
+↓
+mengatur tampilan
+↓
+Layout
+Button
+Form
+Hidden state
+Responsive design
+```
+
+```text
+JavaScript
+↓
+mengatur behavior
+↓
+Event
+CRUD
+Data
+localStorage
+DOM
+```
+
+Contohnya:
+
+```text
+HTML
+↓
+#task-form
+
+CSS
+↓
+.hidden {
+  display: none;
+}
+
+JavaScript
+↓
+classList.toggle("hidden")
+```
+
+Ketiganya bekerja bersama untuk membuat aplikasi menjadi interaktif.
+
+---
+
+# Alur Create
+
+```text
+User
+↓
+Add New Task
+↓
+Form muncul
+↓
+User mengisi data
+↓
+Submit
+↓
+addOrUpdateTask()
+↓
+Validasi title
+↓
+Buat task object
+↓
+unshift()
+↓
+JSON.stringify()
+↓
+localStorage
+↓
+updateTaskContainer()
+↓
+reset()
+```
+
+---
+
+# Alur Read
+
+```text
+Halaman dibuka
+↓
+localStorage.getItem("data")
+↓
+JSON.parse()
+↓
+taskData
+↓
+taskData.length
+↓
+updateTaskContainer()
+↓
+forEach()
+↓
+HTML dibuat
+↓
+Task tampil
+```
+
+---
+
+# Alur Update
+
+```text
+User klik Edit
+↓
+editTask()
+↓
+findIndex()
+↓
+currentTask
+↓
+Form diisi
+↓
+User mengubah data
+↓
+Submit
+↓
+addOrUpdateTask()
+↓
+findIndex()
+↓
+taskData[index] = taskObj
+↓
+JSON.stringify()
+↓
+localStorage
+↓
 Render ulang
 ```
 
-Ketika task dihapus:
+---
 
-``` text
-Delete
- ↓
+# Alur Delete
+
+```text
+User klik Delete
+↓
 deleteTask()
- ↓
+↓
 findIndex()
- ↓
+↓
+Task ditemukan
+↓
+DOM element dihapus
+↓
 splice()
- ↓
-DOM remove()
- ↓
-localStorage
+↓
+localStorage diperbarui
 ```
 
-------------------------------------------------------------------------
+---
 
-# Catatan Pengembangan
+# Alur Close Form
 
-Workshop ini memiliki **66 steps**, sehingga beberapa bagian terasa
-berulang karena function yang sudah dibuat sebelumnya terus digunakan
-kembali ketika fitur baru ditambahkan.
+```text
+User klik Close
+↓
+Cek isi form
+↓
+Cek perubahan
+│
+├── Tidak ada perubahan
+│   ↓
+│   reset()
+│
+└── Ada perubahan
+    ↓
+    showModal()
+    │
+    ├── Cancel
+    │   ↓
+    │   kembali ke form
+    │
+    └── Discard
+        ↓
+        reset()
+```
 
-Saya mengalami bahwa memahami setiap syntax secara terpisah belum selalu
-cukup untuk langsung memahami keseluruhan aplikasi.
+---
 
-Bagian yang paling menantang bukan lagi `setItem()`, `getItem()`,
-`JSON.parse()`, atau `JSON.stringify()` secara individual, tetapi
-memahami **bagaimana beberapa function, array, object, DOM, event, dan
-localStorage saling terhubung dalam satu alur aplikasi**.
+# Konsep JavaScript yang Dilatih
 
-Hal tersebut menjadi catatan penting sebelum melanjutkan ke project
-berikutnya yang memiliki pola serupa.
+| Konsep | Penggunaan |
+|---|---|
+| DOM | Mengakses dan mengubah HTML |
+| `getElementById()` | Mengambil element berdasarkan ID |
+| `addEventListener()` | Menangani event |
+| `localStorage` | Menyimpan data browser |
+| `setItem()` | Menyimpan data |
+| `getItem()` | Mengambil data |
+| `JSON.stringify()` | Mengubah JavaScript value menjadi JSON string |
+| `JSON.parse()` | Mengubah JSON string menjadi JavaScript value |
+| Array | Menyimpan banyak task |
+| Object | Menyimpan satu task |
+| `findIndex()` | Mencari index task |
+| `forEach()` | Memproses setiap task |
+| `unshift()` | Menambahkan task ke awal array |
+| `splice()` | Menghapus task |
+| Object Destructuring | Mengambil property object |
+| Template Literal | Membentuk HTML |
+| `Date.now()` | Membantu membuat ID |
+| `classList.toggle()` | Mengubah visibility form |
+| `preventDefault()` | Mencegah submit default |
+| `showModal()` | Menampilkan dialog |
+| `return` | Menghentikan function |
 
-------------------------------------------------------------------------
+---
 
-# Tech Stack
+# Yang Saya Pelajari
 
-  Technology      Penggunaan
-  --------------- ------------------------------------
-  HTML            Struktur Todo App
-  CSS             Tampilan Todo App
-  JavaScript      Logic aplikasi
-  DOM API         Manipulasi halaman
-  localStorage    Persistent storage
-  JSON            Serialisasi dan deserialisasi data
-  Array Methods   Pengolahan task
-  freeCodeCamp    Platform workshop
+### JavaScript
 
-------------------------------------------------------------------------
+- `localStorage` digunakan untuk menyimpan data secara persistent di browser.
+- `setItem()` digunakan untuk menyimpan data berdasarkan key.
+- `getItem()` digunakan untuk mengambil data berdasarkan key.
+- `JSON.stringify()` digunakan sebelum array atau object disimpan ke `localStorage`.
+- `JSON.parse()` digunakan untuk mengubah JSON string kembali menjadi JavaScript value.
+- Array dapat berisi banyak object.
+- Object dapat digunakan untuk merepresentasikan satu task.
+- `findIndex()` dapat digunakan untuk mencari posisi task.
+- `unshift()` dapat digunakan untuk menambahkan task ke awal array.
+- `splice()` dapat digunakan untuk menghapus task dari array.
+- `forEach()` dapat digunakan untuk memproses setiap task.
+- Object destructuring dapat mengambil property object secara langsung.
+- Template literal dapat digunakan untuk membuat HTML secara dinamis.
+- Event listener membuat aplikasi dapat merespons tindakan user.
+- Function dapat saling memanggil dan bekerja sebagai satu alur aplikasi.
+- `currentTask` dapat digunakan untuk menyimpan state sederhana.
 
-# Status Project
+### DOM
 
-  Item             Detail
-  ---------------- --------------------------------------
-  Platform         freeCodeCamp
-  Workshop         Build a Todo App Using Local Storage
-  Category         JavaScript
-  Main Concept     localStorage + CRUD
-  Data Structure   Array of Objects
-  Storage          Browser localStorage
-  Steps            66
-  Status           Completed
+- JavaScript dapat mengambil element HTML menggunakan ID.
+- JavaScript dapat mengubah isi element menggunakan `innerText` atau `innerHTML`.
+- JavaScript dapat menghapus element menggunakan `.remove()`.
+- JavaScript dapat mengubah class menggunakan `classList.toggle()`.
+- JavaScript dapat menampilkan dialog menggunakan `showModal()`.
 
-------------------------------------------------------------------------
+### CRUD
 
-## Personal Notes
+```text
+Create
+→ membuat task
 
-Workshop ini menjadi salah satu latihan yang mulai membuat saya melihat
-JavaScript sebagai bagian dari sebuah aplikasi yang saling terhubung.
+Read
+→ membaca task
 
-Saya sudah memahami penggunaan dasar:
+Update
+→ mengubah task
 
-``` js
+Delete
+→ menghapus task
+```
+
+CRUD ternyata tidak berdiri sendiri.
+
+CRUD bekerja bersama:
+
+```text
+Array
++
+Object
++
+DOM
++
+JSON
++
+localStorage
++
+Event
+```
+
+---
+
+# Catatan Pribadi
+
+Workshop ini memiliki **66 steps**, sehingga beberapa bagian terasa cukup panjang karena function yang sudah dibuat sebelumnya terus digunakan kembali ketika fitur baru ditambahkan.
+
+Pada awalnya saya sudah memahami penggunaan dasar:
+
+```js
 localStorage.setItem()
 localStorage.getItem()
 JSON.stringify()
 JSON.parse()
 ```
 
-Namun setelah mengerjakan workshop dengan 66 steps, saya menyadari bahwa
-tantangannya bukan hanya memahami satu syntax.
+Namun setelah masuk ke project ini, saya mulai menemukan bahwa memahami syntax satu per satu belum cukup.
 
-Saya perlu memahami bagaimana data bergerak dari form, masuk ke object,
-disimpan ke array, diubah menjadi JSON, disimpan di `localStorage`,
-diambil kembali, kemudian ditampilkan ke DOM.
+Tantangan sebenarnya mulai muncul ketika beberapa bagian harus bekerja bersama.
 
-Struktur sederhananya:
-
-``` text
+```text
 Form
- ↓
+↓
 Object
- ↓
+↓
 Array
- ↓
+↓
+Function
+↓
 JSON
- ↓
+↓
 localStorage
- ↓
-JSON.parse()
- ↓
-Array
- ↓
+↓
 DOM
+↓
+Event
+↓
+Function lainnya
 ```
 
-Saya juga mulai memahami bahwa ketika project semakin besar, function
-yang sudah dibuat sebelumnya sering kali harus digunakan kembali oleh
-function lain.
+Saya sempat merasa hang ketika harus membongkar kembali function lama untuk membuat fitur baru.
 
-Hal tersebut membuat saya sempat merasa hang ketika harus memulai
-project berikutnya, terutama karena project selanjutnya memiliki pola
-yang mirip.
+Namun dari workshop ini saya mulai memahami bahwa hal tersebut merupakan bagian dari proses membangun aplikasi.
 
-Untuk saat ini, saya ingin lebih memahami **alur data dan hubungan
-antar-function**, bukan sekadar menghafalkan syntax.
+Saya tidak harus menghafalkan seluruh code.
 
-Project ini membantu saya menghubungkan materi **localStorage, CRUD,
-DOM, array, object, JSON, dan event handling** ke dalam satu aplikasi
-JavaScript yang lebih nyata.
+Yang lebih penting adalah memahami:
+
+```text
+Data disimpan di mana?
+↓
+Data berubah di mana?
+↓
+Function mana yang mengubahnya?
+↓
+Kapan data disimpan?
+↓
+Kapan DOM dirender ulang?
+↓
+Bagaimana user berinteraksi dengan aplikasi?
+```
+
+Mental model yang ingin saya bawa ke project berikutnya:
+
+```text
+USER ACTION
+↓
+EVENT
+↓
+FUNCTION
+↓
+UPDATE DATA
+↓
+SAVE DATA
+↓
+UPDATE DOM
+```
+
+Workshop ini juga membuat saya mulai melihat bahwa project JavaScript yang lebih besar bukan sekadar kumpulan syntax.
+
+Setiap function mempunyai tugas tertentu dan beberapa function dapat bekerja bersama untuk membentuk satu fitur.
+
+Untuk project berikutnya, saya ingin lebih fokus memahami **alur data dan hubungan antar-function**, bukan hanya menghafalkan syntax.
+
+---
+
+**Platform:** freeCodeCamp  
+**Workshop:** Build a Todo App Using Local Storage  
+**Language:** JavaScript  
+**Main Concepts:** DOM, CRUD, Array, Object, JSON, localStorage, Event Handling
