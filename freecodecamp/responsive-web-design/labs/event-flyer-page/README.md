@@ -18,12 +18,7 @@ Selain memenuhi user stories dari freeCodeCamp, tampilan project juga dikembangk
 ---
 
 ## Preview
-
-Tambahkan screenshot project di repository dengan nama `preview.png`, kemudian:
-
-```md
-![Event Flyer Page Preview](preview.png)
-```
+<img width="1884" height="1511" alt="preview" src="https://github.com/user-attachments/assets/5246eaef-6ee7-4fdf-bd5e-2e9332f8ebb1" />
 
 ---
 
@@ -56,8 +51,7 @@ build-an-event-flyer-page/
 │
 ├── index.html
 ├── styles.css
-├── README.md
-└── preview.png
+└── README.md
 ```
 
 ---
