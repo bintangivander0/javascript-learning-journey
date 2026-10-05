@@ -1,8 +1,8 @@
 # Event Flyer Page
 
 <p align="center">
-  <img src="https://img.shields.io/badge/CSS-Absolute%20%26%20Relative%20Units-1572B6?logo=css&logoColor=white" alt="CSS Absolute and Relative Units" />
   <img src="https://img.shields.io/badge/freeCodeCamp-Lab-0A0A23?logo=freecodecamp&logoColor=white" alt="freeCodeCamp Lab" />
+  <img src="https://img.shields.io/badge/CSS-Absolute%20%26%20Relative%20Units-1572B6?logo=css&logoColor=white" alt="CSS Absolute and Relative Units" />
 </p>
 
 > **Milestone:** Lab pada materi **Absolute and Relative Units** dalam Responsive Web Design Certification freeCodeCamp.
