@@ -1208,4 +1208,4 @@ Status Management
 **Platform:** freeCodeCamp  
 **Lab:** Build a Project Idea Board  
 **Language:** JavaScript  
-**Focus:** Classes, Objects, Methods & Object-Oriented Programming
+**Focus:** Classes
