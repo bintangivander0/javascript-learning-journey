@@ -3,7 +3,7 @@
 <p align="center">
   <img src="https://img.shields.io/badge/JavaScript-Classes-F7DF1E?logo=javascript&logoColor=000" alt="JavaScript Classes" />
   <img src="https://img.shields.io/badge/freeCodeCamp-Lab-0A0A23?logo=freecodecamp&logoColor=white" alt="freeCodeCamp Lab" />
-  <img src="https://img.shields.io/badge/Topic-Object%20Classes-4B5563" alt="Classes" />
+  <img src="https://img.shields.io/badge/Topic-Classes-4B5563" alt="Classes" />
 </p>
 
 > **Milestone:** Lab setelah mempelajari JavaScript Classes, constructor, methods, inheritance, dan static members.
