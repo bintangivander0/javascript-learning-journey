@@ -1,0 +1,123 @@
+@import url('https://fonts.googleapis.com/css2?family=Cinzel:wght@400..900&family=Mate:ital@0;1&display=swap');
+
+html {
+  background-color: #ece9e4;
+}
+
+body {
+  padding: 50px 0;
+  margin: 0 auto;
+  width: 90vw;
+  min-height: calc(100vh - 100px);
+
+  background-color: #fffdf9;
+  box-shadow: 0 0 21px rgba(0, 0, 0, 0.08);
+}
+
+h1 {
+  font-family: "Cinzel", serif;
+  font-size: 30px;
+  font-weight: 600;
+}
+
+p, li {
+  font-family: "Mate", serif;
+  font-size: 14px;
+}
+
+h2 {
+  font-family: "Cinzel", serif;
+  font-size: 20px;
+  font-weight: 600;
+}
+
+header {
+  text-align: center;
+}
+
+header img {
+  width: 50%;
+  max-width: 600px;
+  display: block;
+  margin: 0 auto 20px auto;
+  border-radius: 7px;
+  box-shadow: 0 5px 17px rgba(0, 0, 0, 0.2)
+}
+
+header h1 {
+  margin: 0 0 20px; 
+  /* atas | kiri-kanan | bawah */
+}
+
+header p {
+  margin: 0 0 9px;
+}
+
+hr {
+  width: 90%;
+  border: none;
+  border-top: 2px solid #d6d3d1;
+  margin: 31px auto;
+}
+
+main {
+  display: flex;
+  justify-content: space-between;
+  width: 90%;
+  margin: 0 auto;
+}
+
+section {
+  width: 30%;
+  padding: 25px;
+  box-sizing: border-box;
+  background-color: #f7f3ee;
+  border-radius: 5px;
+  border-top: 5px solid #8b6f55;
+  color: #8b6f55;
+}
+
+section:nth-of-type(2) {
+  border-top-color: #6f7f6a;
+}
+
+section:nth-of-type(2) h2 {
+  color: #6f7f6a;
+}
+
+section:nth-of-type(3) {
+  border-top-color: #8a6670;
+}
+
+section:nth-of-type(3) h2 {
+  color: #8a6670;
+}
+
+section h2 {
+  margin-top: 0;
+}
+
+section ul {
+  padding-left: 20px;
+  margin-bottom: 0;
+}
+
+section li {
+  margin-bottom: 20px;
+  line-height: 1.5;
+}
+
+footer p {
+  text-align: center;
+}
+
+@media (max-width: 650px) {
+  main {
+    flex-direction: column;
+    gap: 25px;
+  }
+
+  section {
+    width:100%;
+  }
+}
