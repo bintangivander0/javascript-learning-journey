@@ -1,7 +1,6 @@
 # Event Flyer Page
 
 <p align="center">
-  <img src="https://img.shields.io/badge/HTML-Semantic%20Structure-E34F26?logo=html5&logoColor=white" alt="HTML" />
   <img src="https://img.shields.io/badge/CSS-Absolute%20%26%20Relative%20Units-1572B6?logo=css&logoColor=white" alt="CSS Absolute and Relative Units" />
   <img src="https://img.shields.io/badge/freeCodeCamp-Lab-0A0A23?logo=freecodecamp&logoColor=white" alt="freeCodeCamp Lab" />
 </p>
