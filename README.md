@@ -58,8 +58,7 @@ freecodecamp/
 ├── javascript/
 │   ├── labs/
 │   ├── workshops/
-│   ├── certification-projects/
-│   └── notes/
+│   └── certification-projects/
 │
 └── responsive-web-design/
 ```
@@ -74,34 +73,16 @@ Each curriculum can have its own structure based on the type of learning materia
 
 My current documented FreeCodeCamp journey includes:
 
-| Category | Projects / Notes |
+| Category | Projects |
 |---|---:|
 | Labs | 30 |
 | Workshops | 10 |
 | Certification Projects | 2 |
-| Learning Notes | 10 |
 
 ### Certification Projects
 
 - [Drum Machine](./freecodecamp/javascript/certification-projects/drum-machine/)
 - [Markdown to HTML Converter](./freecodecamp/javascript/certification-projects/markdown-to-html-converter/)
-
-### Learning Notes
-
-The JavaScript notes cover topics such as:
-
-- JavaScript Fundamentals
-- Higher-Order Functions
-- DOM
-- DOM Manipulation
-- Event Handling
-- Node and DOM
-- Regular Expressions
-- Form Validation
-- Accessibility
-- APIs
-
----
 
 ## Learning Process
 
