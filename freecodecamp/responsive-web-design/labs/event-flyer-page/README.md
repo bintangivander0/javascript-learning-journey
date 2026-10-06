@@ -776,13 +776,6 @@ CSS Cascade
 
 ---
 
-<p align="center">
-  <strong>Absolute and Relative Units — Event Flyer Page Completed</strong><br>
-  <sub>Next stop: continue the Responsive Web Design Certification journey.</sub>
-</p>
-
----
-
 **Platform:** freeCodeCamp  
 **Lab:** Build an Event Flyer Page  
 **Languages:** HTML & CSS  
