@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Job Application Form</title>
+    <link rel="stylesheet" href="styles.css" />
+</head>
+<body>
+    <div class="container">
+        <form>
+            <label for="name">Nama Lengkap:</label>
+            <input 
+                type="text" 
+                id="name" 
+                placeholder="Nama harus sesuai KTP" 
+                required 
+              />
+            <label for="email">Email:</label>
+            <input 
+                type="email" 
+                id="email" 
+                placeholder="Masukkan email utama" 
+                required 
+              />
+            <label for="position">Posisi:</label>
+            <select id="position" required>
+                <option value="" disable selected hidden>Pilih posisi yang dibutuhkan</option>
+                <option value="1">Fullstack Developer</option>
+                <option value="2">Network Engineer</option>
+                <option value="3">Data Analyst</option>
+            </select>
+            <fieldset class="radio-group">
+                <legend>Waktu kerja:</legend>
+                <input type="radio" id="full-time" name="availability" required />
+                <label for="full-time">Full-Time</label>
+                <input type="radio" id="part-time" name="availability" />
+                <label for="part-time">Part-Time</label>
+            </fieldset>
+            <label for="message">Apa yang kamu harapkan dari pekerjaan ini?</label>
+            <textarea id="message" rows="4" cols="53" placeholder="Tuliskan motivasi anda" required></textarea>
+            <button type="submit">Kirim</button>
+        </form>
+    </div>
+</body>
+</html>
