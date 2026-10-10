@@ -1,96 +1,118 @@
-# Event Flyer Page
+# Build an Event Flyer Page
 
 <p align="center">
+  <img src="https://img.shields.io/badge/HTML%20%26%20CSS-Absolute%20and%20Relative%20Units-0A0A23" alt="HTML & CSS Absolute and Relative Units" />
   <img src="https://img.shields.io/badge/freeCodeCamp-Lab-0A0A23?logo=freecodecamp&logoColor=white" alt="freeCodeCamp Lab" />
-  <img src="https://img.shields.io/badge/CSS-Absolute%20%26%20Relative%20Units-1572B6?logo=css&logoColor=white" alt="CSS Absolute and Relative Units" />
+  <img src="https://img.shields.io/badge/Topic-Absolute%20and%20Relative%20Units-4B5563" alt="Absolute and Relative Units" />
 </p>
 
-> **Milestone:** Lab pada materi **Absolute and Relative Units** dalam Responsive Web Design Certification freeCodeCamp.
+> **Milestone:** Lab setelah mempelajari Absolute and Relative Units.
 
-Project ini digunakan untuk memahami bagaimana unit CSS seperti `px`, `%`, `vw`, dan `vh` digunakan untuk menentukan ukuran elemen berdasarkan acuan yang berbeda.
+## About
 
-Pada lab ini saya membuat sebuah event flyer untuk:
+Project ini membuat sebuah flyer event bertema **Community Gathering & Cozy Talk — "Share Your Story"** menggunakan HTML dan CSS.
 
-**Community Gathering & Cozy Talk — "Share Your Story"**
+Fokus utama lab adalah menggunakan absolute dan relative units seperti `px`, `%`, `vw`, dan `vh`, serta menggabungkan unit berbeda menggunakan `calc()`.
 
-Selain memenuhi user stories dari freeCodeCamp, tampilan project juga dikembangkan dengan layout responsif, custom typography, section cards, dan media query.
-
----
+Di luar requirement utama freeCodeCamp, project ini juga dikembangkan dengan layout Flexbox, responsive breakpoint, custom typography, dan styling section card.
 
 ## Preview
-<img width="1884" height="1511" alt="preview" src="https://github.com/user-attachments/assets/5246eaef-6ee7-4fdf-bd5e-2e9332f8ebb1" />
 
----
+![Build an Event Flyer Page Preview](https://github.com/user-attachments/assets/5246eaef-6ee7-4fdf-bd5e-2e9332f8ebb1)
 
 ## Konsep Utama
 
-Materi utama yang dipraktikkan dalam lab ini:
-
-```text
-Absolute Units
-Relative Units
-px
-%
-vw
-vh
-calc()
-width
-min-height
-padding
-margin
-```
-
-Beberapa konsep tersebut digunakan bersamaan untuk menentukan ukuran halaman secara relatif terhadap viewport maupun parent element.
-
----
+- Absolute Units
+- Relative Units
+- `px`
+- `%`
+- `vw`
+- `vh`
+- `calc()`
+- `width`
+- `min-height`
+- `padding`
+- `margin`
+- `box-sizing: border-box`
 
 ## Struktur Project
 
 ```text
-build-an-event-flyer-page/
-│
+event-flyer-page/
 ├── index.html
-├── styles.css
-└── README.md
+└── styles.css
 ```
 
----
+## Source Code
 
-## User Stories Utama
+- [`index.html`](./index.html)
+- [`styles.css`](./styles.css)
 
-Project harus memiliki struktur halaman berupa:
+## Pembahasan
 
-```text
-body
-├── header
-│   ├── img
-│   ├── h1
-│   └── p
-│
-├── hr
-│
-├── main
-│   ├── section
-│   ├── section
-│   └── section
-│
-├── hr
-│
-└── footer
-```
+### 1. Struktur Semantic HTML
 
-Beberapa aturan CSS utama yang diminta oleh lab adalah:
+Halaman menggunakan elemen `header`, `main`, `section`, `hr`, dan `footer` untuk membagi konten berdasarkan fungsinya.
+
+Di dalam `header`, gambar event ditempatkan sebelum `h1` sesuai requirement lab. Bagian `main` berisi tiga `section` yang menampilkan Event Highlights, Special Guests, serta Snacks & Amenities.
+
+### 2. Absolute Unit dengan `px`
+
+Beberapa nilai menggunakan `px` ketika ukuran yang dibutuhkan bersifat tetap, misalnya:
 
 ```css
 body {
   padding: 50px 0;
-  margin: 0 auto;
+}
+```
+
+Nilai tersebut memberikan padding `50px` pada bagian atas dan bawah `body`.
+
+Unit `px` juga digunakan untuk beberapa spacing, border, radius, dan batas ukuran gambar.
+
+### 3. Relative Unit dengan `vw`
+
+Lebar `body` ditentukan menggunakan:
+
+```css
+body {
   width: 90vw;
+}
+```
+
+`vw` mengacu pada lebar viewport. Nilai `90vw` berarti `body` menggunakan 90% dari lebar viewport.
+
+Saat lebar browser berubah, ukuran `body` ikut berubah berdasarkan viewport tersebut.
+
+### 4. Relative Unit dengan `vh`
+
+Tinggi viewport digunakan melalui:
+
+```css
+body {
   min-height: calc(100vh - 100px);
 }
 ```
 
-Selain itu:
+`100vh` mewakili 100% tinggi viewport.
+
+Karena `body` memiliki padding atas dan bawah masing-masing `50px`, total padding vertikalnya adalah `100px`.
+
+### 5. Menggunakan `calc()`
+
+Property `min-height` menggunakan:
+
+```css
+min-height: calc(100vh - 100px);
+```
+
+`calc()` memungkinkan CSS melakukan perhitungan menggunakan unit yang berbeda dalam satu expression.
+
+Pada project ini, tinggi viewport dari `100vh` dikurangi total padding vertikal sebesar `100px`.
+
+### 6. Percentage dengan `%`
+
+Elemen `hr` dan `section` menggunakan percentage:
 
 ```css
 hr {
@@ -102,266 +124,56 @@ section {
 }
 ```
 
----
+Percentage bersifat relatif terhadap containing block yang menjadi acuannya.
 
-## 1. Absolute Unit dengan `px`
+Karena itu, `%` berbeda dengan `vw`: `%` mengikuti ruang dari containing block, sedangkan `vw` langsung mengikuti viewport.
 
-Salah satu unit yang digunakan adalah:
+### 7. Memusatkan Elemen dengan `margin: auto`
 
-```css
-padding: 50px 0;
-```
-
-`px` merupakan absolute unit.
-
-Pada bagian tersebut:
-
-```text
-padding atas   = 50px
-padding kanan  = 0
-padding bawah  = 50px
-padding kiri   = 0
-```
-
-Nilai `50px` tidak dihitung berdasarkan ukuran parent maupun viewport.
-
----
-
-## 2. Relative Unit dengan `vw`
-
-Body menggunakan:
-
-```css
-width: 90vw;
-```
-
-`vw` berarti **viewport width**.
-
-Jadi:
-
-```text
-1vw = 1% lebar viewport
-```
-
-dan:
-
-```text
-90vw = 90% lebar viewport
-```
-
-Jika viewport berubah ukuran, lebar body ikut berubah.
-
----
-
-## 3. Relative Unit dengan `vh`
-
-Project menggunakan:
-
-```css
-min-height: calc(100vh - 100px);
-```
-
-`vh` berarti **viewport height**.
-
-```text
-100vh = 100% tinggi viewport
-```
-
-Karena body memiliki:
-
-```css
-padding-top: 50px;
-padding-bottom: 50px;
-```
-
-total padding vertikal adalah:
-
-```text
-100px
-```
-
-Maka:
-
-```css
-calc(100vh - 100px)
-```
-
-digunakan untuk menentukan tinggi minimum body setelah mempertimbangkan padding atas dan bawah.
-
----
-
-## 4. Menggunakan `calc()`
-
-CSS menyediakan function:
-
-```css
-calc()
-```
-
-untuk melakukan perhitungan nilai CSS.
-
-Pada project ini:
-
-```css
-min-height: calc(100vh - 100px);
-```
-
-menggabungkan dua jenis unit:
-
-```text
-vh
-px
-```
-
-dalam satu perhitungan.
-
-Ini menunjukkan bahwa relative unit dan absolute unit dapat digunakan bersama melalui `calc()`.
-
----
-
-## 5. Percentage dengan `%`
-
-Elemen `hr` menggunakan:
-
-```css
-width: 90%;
-```
-
-Sedangkan section menggunakan:
-
-```css
-width: 30%;
-```
-
-Berbeda dengan `vw`, percentage biasanya dihitung berdasarkan ukuran containing block atau parent yang menjadi acuannya.
-
-Contohnya:
-
-```css
-main {
-  width: 90%;
-}
-```
-
-berarti lebar `main` adalah 90% dari ruang yang menjadi acuan layout-nya.
-
----
-
-## 6. Memahami Perbedaan `%` dan `vw`
-
-Walaupun keduanya relative unit, acuannya berbeda.
-
-| Unit | Acuan |
-|---|---|
-| `px` | Ukuran tetap |
-| `%` | Ukuran containing block / parent |
-| `vw` | Lebar viewport |
-| `vh` | Tinggi viewport |
+`body`, gambar header, `hr`, dan `main` menggunakan pola `margin` dengan nilai `auto` pada sisi kiri dan kanan.
 
 Contohnya:
 
 ```css
 body {
-  width: 90vw;
+  margin: 0 auto;
 }
 ```
 
-mengacu pada viewport.
+Ketika elemen memiliki width tertentu, margin kiri dan kanan `auto` membagi ruang kosong sehingga elemen berada di tengah secara horizontal.
 
-Sedangkan:
+### 8. Membatasi Ukuran Gambar dengan `max-width`
 
-```css
-main {
-  width: 90%;
-}
-```
-
-mengacu pada ruang yang tersedia dari parent-nya.
-
----
-
-## 7. Menggunakan `margin: 0 auto`
-
-Body menggunakan:
-
-```css
-margin: 0 auto;
-```
-
-Nilai pertama berlaku untuk atas dan bawah:
-
-```text
-0
-```
-
-Sedangkan nilai kedua berlaku untuk kiri dan kanan:
-
-```text
-auto
-```
-
-Dengan body yang memiliki width tertentu, `auto` pada margin kiri dan kanan membuat body berada di tengah secara horizontal.
-
-Pola serupa juga digunakan pada:
+Gambar event menggunakan kombinasi:
 
 ```css
 header img {
-  margin: 0 auto 20px auto;
+  width: 50%;
+  max-width: 600px;
 }
 ```
 
----
+`width: 50%` membuat gambar mengikuti ruang yang tersedia, sedangkan `max-width: 600px` mencegah gambar terus membesar pada viewport yang lebar.
 
-## 8. `box-sizing: border-box`
+### 9. Menggunakan `box-sizing: border-box`
 
-Setiap section menggunakan:
-
-```css
-box-sizing: border-box;
-```
-
-Section juga memiliki:
+Section menggunakan:
 
 ```css
-width: 30%;
-padding: 25px;
+section {
+  width: 30%;
+  padding: 25px;
+  box-sizing: border-box;
+}
 ```
 
-Dengan:
+Dengan `border-box`, padding dan border dihitung sebagai bagian dari total width elemen.
 
-```css
-box-sizing: border-box;
-```
+Ini membantu menjaga ukuran section tetap sesuai dengan nilai `30%` yang ditentukan.
 
-padding dihitung sebagai bagian dari width.
+### 10. Menata Section dengan Flexbox
 
-Jadi section tetap mempertahankan lebar total sebesar `30%`.
-
----
-
-## Eksplorasi Tambahan
-
-Beberapa bagian berikut **bukan requirement utama dari user stories**, tetapi saya tambahkan untuk mempraktikkan konsep CSS lain sekaligus memperbaiki tampilan project.
-
-```text
-Flexbox
-Responsive Design
-Media Queries
-Google Fonts
-box-shadow
-border-radius
-:nth-of-type()
-CSS Cascade
-box-sizing
-Custom Colors
-Responsive Cards
-```
-
----
-
-## 9. Layout dengan Flexbox
-
-Tiga section diletakkan secara horizontal menggunakan:
+Tiga section diletakkan sejajar melalui:
 
 ```css
 main {
@@ -374,43 +186,13 @@ main {
 
 `display: flex` membuat direct children dari `main` menjadi flex items.
 
-Karena direct children tersebut adalah:
+`justify-content: space-between` kemudian mendistribusikan ruang kosong di antara ketiga section.
 
-```html
-<section>...</section>
-<section>...</section>
-<section>...</section>
-```
+### 11. Membuat Layout Responsive
 
-ketiganya dapat disusun dalam satu baris.
+Saat viewport semakin sempit, tiga section tidak dipaksa terus mengecil dalam satu baris.
 
----
-
-## 10. `justify-content: space-between`
-
-Property:
-
-```css
-justify-content: space-between;
-```
-
-mendistribusikan ruang kosong di antara flex items.
-
-Dengan tiga section:
-
-```text
-Section 1     Section 2     Section 3
-```
-
-ruang antar-section menjadi lebih teratur.
-
----
-
-## 11. Membuat Layout Responsive
-
-Pada viewport yang sempit, tiga section tidak cukup nyaman jika terus dipaksa berada pada satu baris.
-
-Karena itu digunakan media query:
+Project menggunakan media query:
 
 ```css
 @media (max-width: 650px) {
@@ -425,55 +207,11 @@ Karena itu digunakan media query:
 }
 ```
 
-Ketika viewport memiliki lebar maksimal `650px`, layout berubah dari:
+Pada viewport dengan lebar maksimal `650px`, arah Flexbox berubah menjadi kolom dan setiap section menggunakan `100%` lebar `main`.
 
-```text
-[ Section 1 ] [ Section 2 ] [ Section 3 ]
-```
+### 12. Styling Section dengan `:nth-of-type()`
 
-menjadi:
-
-```text
-[ Section 1 ]
-
-[ Section 2 ]
-
-[ Section 3 ]
-```
-
-Nilai `650px` menjadi breakpoint untuk perubahan layout tersebut.
-
----
-
-## 12. `flex-direction: column`
-
-Pada keadaan normal, flex container menggunakan arah baris.
-
-Media query mengubahnya menjadi:
-
-```css
-flex-direction: column;
-```
-
-Sehingga section disusun secara vertikal.
-
----
-
-## 13. `gap`
-
-Saat section berubah menjadi satu kolom, digunakan:
-
-```css
-gap: 25px;
-```
-
-untuk memberikan jarak antar-flex item tanpa perlu membuat margin khusus pada setiap section.
-
----
-
-## 14. Menggunakan `:nth-of-type()`
-
-Setiap section memiliki warna aksen yang berbeda.
+Setiap section diberi warna aksen yang berbeda menggunakan `:nth-of-type()`.
 
 Contohnya:
 
@@ -487,19 +225,9 @@ section:nth-of-type(3) {
 }
 ```
 
-Selector:
+Selector tersebut memilih section berdasarkan urutannya di antara elemen dengan tipe yang sama.
 
-```css
-:nth-of-type()
-```
-
-digunakan untuk memilih elemen berdasarkan urutannya di antara elemen dengan tipe yang sama.
-
----
-
-## 15. Selector Turunan
-
-Untuk memilih heading dari section tertentu digunakan:
+Heading pada section tertentu juga dapat ditargetkan dengan selector turunan seperti:
 
 ```css
 section:nth-of-type(2) h2 {
@@ -507,271 +235,94 @@ section:nth-of-type(2) h2 {
 }
 ```
 
-Artinya:
+### 13. Custom Typography
 
-> Pilih `h2` yang berada di dalam section kedua.
+Project menggunakan Google Fonts untuk membedakan heading dan body text.
 
-Dengan cara ini, style tidak diterapkan kepada seluruh `h2`.
+`Cinzel` digunakan pada heading, sedangkan `Mate` digunakan untuk paragraf dan list.
 
----
+Typography ini merupakan bagian dari styling tambahan dan bukan requirement utama lab.
 
-## 16. Google Fonts
+### 14. Visual Styling Tambahan
 
-Project menggunakan dua font:
+Beberapa elemen diberi `border-radius`, `background-color`, dan `box-shadow` untuk membuat flyer memiliki tampilan yang lebih berbeda dari contoh bawaan freeCodeCamp.
 
-```css
-@import url('https://fonts.googleapis.com/css2?family=Cinzel:wght@400..900&family=Mate:ital@0;1&display=swap');
-```
-
-`Cinzel` digunakan untuk heading.
-
-```css
-h1,
-h2 {
-  font-family: "Cinzel", serif;
-}
-```
-
-Sedangkan `Mate` digunakan untuk body text:
-
-```css
-p,
-li {
-  font-family: "Mate", serif;
-}
-```
-
----
-
-## 17. `max-width`
-
-Gambar header menggunakan:
-
-```css
-width: 50%;
-max-width: 600px;
-```
-
-`width: 50%` membuat ukuran gambar mengikuti ruang parent.
-
-Sedangkan:
-
-```css
-max-width: 600px;
-```
-
-membatasi agar gambar tidak terus membesar pada viewport yang lebar.
-
----
-
-## 18. `border-radius`
-
-Gambar dan section menggunakan:
-
-```css
-border-radius
-```
-
-untuk memberikan sudut yang sedikit membulat.
-
-Contohnya:
-
-```css
-header img {
-  border-radius: 7px;
-}
-```
-
-dan:
-
-```css
-section {
-  border-radius: 5px;
-}
-```
-
----
-
-## 19. `box-shadow`
-
-Gambar menggunakan:
-
-```css
-box-shadow: 0 5px 17px rgba(0, 0, 0, 0.2);
-```
-
-Sedangkan body menggunakan:
-
-```css
-box-shadow: 0 0 21px rgba(0, 0, 0, 0.08);
-```
-
-`box-shadow` dapat menggunakan beberapa nilai untuk menentukan posisi dan blur bayangan.
-
-Struktur sederhananya:
-
-```text
-horizontal-offset
-vertical-offset
-blur-radius
-color
-```
-
----
+Styling ini tidak mengubah requirement utama mengenai penggunaan absolute dan relative units.
 
 ## Bagian yang Paling Penting Buat Saya
 
-### Relative Unit Tidak Selalu Memiliki Acuan yang Sama
+Hal yang paling penting dari lab ini adalah memahami bahwa **relative unit tidak selalu memiliki acuan yang sama**.
 
-```css
-width: 90vw;
-```
+`vw` dan `vh` mengacu langsung pada viewport, sedangkan `%` mengikuti containing block yang relevan. Karena itu, dua nilai yang sama-sama ditulis sebagai unit relatif dapat menghasilkan perilaku layout yang berbeda.
 
-menggunakan viewport sebagai acuan.
+Saya juga perlu memahami bahwa `calc()` dapat menggabungkan nilai seperti `vh` dan `px`, sehingga ukuran elemen dapat tetap mengikuti viewport sambil memperhitungkan ukuran tetap seperti padding.
 
-Sedangkan:
+## Eksperimen Tambahan
 
-```css
-width: 90%;
-```
+Selain requirement utama freeCodeCamp, saya menambahkan beberapa eksperimen pada project ini:
 
-menggunakan containing block sebagai acuan.
+- Flexbox untuk menyusun tiga section secara horizontal.
+- Media query pada breakpoint `650px`.
+- `flex-direction: column` untuk layout layar sempit.
+- `gap` untuk memberi jarak antar-section pada layout kolom.
+- Google Fonts untuk custom typography.
+- `:nth-of-type()` untuk memberi warna aksen berbeda pada setiap section.
+- `border-radius` dan `box-shadow` untuk visual styling.
+- `max-width` untuk membatasi ukuran maksimum gambar.
 
-Jadi walaupun keduanya relative unit, cara perhitungannya berbeda.
-
----
-
-### `calc()` Bisa Menggabungkan Unit
-
-```css
-min-height: calc(100vh - 100px);
-```
-
-menunjukkan bahwa CSS dapat melakukan perhitungan antara:
-
-```text
-relative unit
-+
-absolute unit
-```
-
-dalam satu expression.
-
----
-
-### Parent Dapat Mengatur Layout Child
-
-Saat:
-
-```css
-main {
-  display: flex;
-}
-```
-
-yang berubah bukan hanya `main`.
-
-Direct children di dalamnya menjadi flex items.
-
-Dalam project ini:
-
-```text
-main
-├── section
-├── section
-└── section
-```
-
-ketiga section menjadi flex items.
-
----
-
-### Responsive Design Tidak Berarti Semuanya Harus Mengecil
-
-Ketika ruang sudah terlalu sempit, section tidak terus dipaksa mengecil.
-
-Media query mengubah layout dari tiga kolom menjadi satu kolom.
-
-```css
-@media (max-width: 650px)
-```
-
-menjadi batas perubahan layout tersebut.
-
----
+Eksperimen tersebut ditambahkan setelah requirement utama lab tetap dipenuhi.
 
 ## Ringkasan Cepat
 
 | Konsep | Fungsi |
 |---|---|
-| `px` | Absolute unit |
-| `%` | Relative terhadap containing block |
-| `vw` | Relative terhadap lebar viewport |
-| `vh` | Relative terhadap tinggi viewport |
-| `calc()` | Melakukan perhitungan nilai CSS |
-| `min-height` | Menentukan tinggi minimum |
+| `px` | Memberikan ukuran absolut dalam CSS |
+| `%` | Menentukan ukuran relatif terhadap containing block |
+| `vw` | Menentukan ukuran relatif terhadap lebar viewport |
+| `vh` | Menentukan ukuran relatif terhadap tinggi viewport |
+| `calc()` | Menghitung nilai CSS menggunakan expression |
+| `min-height` | Menentukan tinggi minimum elemen |
 | `margin: auto` | Membantu memusatkan elemen dengan width tertentu |
-| `box-sizing` | Mengatur bagaimana width dan height dihitung |
-| `display: flex` | Membuat flex formatting context |
-| `justify-content` | Mengatur distribusi flex items |
-| `flex-direction` | Mengatur arah flex items |
-| `gap` | Memberikan jarak antar-item |
-| `@media` | Memberikan CSS berdasarkan kondisi media |
-| `max-width` | Membatasi lebar maksimum |
+| `max-width` | Membatasi lebar maksimum elemen |
+| `box-sizing: border-box` | Memasukkan padding dan border ke dalam perhitungan width |
+| `display: flex` | Membuat direct children menjadi flex items |
+| `justify-content` | Mengatur distribusi ruang pada main axis Flexbox |
+| `flex-direction` | Mengatur arah susunan flex items |
+| `gap` | Memberikan jarak antar-flex item |
+| `@media` | Menerapkan CSS berdasarkan kondisi media |
 | `:nth-of-type()` | Memilih elemen berdasarkan urutan tipenya |
-| `border-radius` | Membulatkan sudut |
-| `box-shadow` | Memberikan bayangan |
-
----
 
 ## Catatan Belajar
 
-- **`px`** merupakan absolute unit.
-- **`vw`** menggunakan lebar viewport sebagai acuan.
-- **`vh`** menggunakan tinggi viewport sebagai acuan.
-- **Percentage** menggunakan containing block sebagai acuan.
-- **`calc()`** dapat melakukan operasi antara unit CSS yang berbeda.
-- **`margin: 0 auto`** dapat digunakan untuk memusatkan elemen yang mempunyai width.
-- **`box-sizing: border-box`** memasukkan padding dan border ke dalam perhitungan width.
-- **Flexbox** dapat digunakan untuk mengatur beberapa section dalam satu baris.
-- **Media query** dapat mengubah layout berdasarkan ukuran viewport.
-- **Breakpoint** adalah titik ketika aturan responsive tertentu mulai digunakan.
-- **`:nth-of-type()`** dapat memilih elemen berdasarkan urutannya.
-- **`max-width`** menjaga elemen agar tidak menjadi terlalu besar.
-- User stories menentukan requirement minimum, sedangkan CSS tambahan dapat digunakan untuk eksplorasi desain selama requirement tersebut tetap terpenuhi.
-
----
+- **`px`** digunakan ketika project membutuhkan ukuran yang tetap.
+- **`vw`** mengacu pada persentase lebar viewport.
+- **`vh`** mengacu pada persentase tinggi viewport.
+- **`%`** mengikuti containing block yang menjadi acuan property tersebut.
+- **`calc()`** dapat menggabungkan absolute dan relative units dalam perhitungan CSS.
+- **`margin: auto`** dapat memusatkan elemen secara horizontal ketika width-nya sudah ditentukan.
+- **`box-sizing: border-box`** membantu menjaga total ukuran elemen tetap sesuai width yang ditentukan.
+- **Flexbox** digunakan sebagai eksperimen tambahan untuk menyusun section.
+- **Media query** memungkinkan layout berubah ketika viewport mencapai breakpoint tertentu.
+- **Responsive design** tidak selalu berarti semua elemen terus diperkecil; layout juga dapat berubah susunan ketika ruang tidak lagi cukup.
 
 ## What I Practiced
 
 ```text
-HTML Structure
 Semantic HTML
 CSS Absolute Units
 CSS Relative Units
-px
-%
-vw
-vh
+Pixels
+Percentages
+Viewport Width
+Viewport Height
 calc()
 Width and Min Height
-Margin
-Padding
+Margin and Padding
 box-sizing
 Flexbox
-Responsive Layout
 Media Queries
-Breakpoints
-flex-direction
-justify-content
-gap
+Responsive Layout
 :nth-of-type()
-Descendant Selectors
-Google Fonts
-max-width
-border-radius
-box-shadow
-CSS Cascade
 ```
 
 ---
@@ -780,3 +331,10 @@ CSS Cascade
 **Lab:** Build an Event Flyer Page  
 **Languages:** HTML & CSS  
 **Focus:** Absolute and Relative Units
+
+---
+
+<p align="center">
+  <strong>Absolute and Relative Units Section — Build an Event Flyer Page Completed</strong><br>
+  <sub>Next stop: continue the Responsive Web Design Certification journey.</sub>
+</p>
