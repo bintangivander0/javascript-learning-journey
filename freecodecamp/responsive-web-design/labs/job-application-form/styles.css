@@ -1,0 +1,148 @@
+body {
+  width: 80%;
+  min-width: 200px;
+  min-height: 300px;
+  margin: 25px auto;
+  background-color: #305e92;
+  font-family: 'Trebuchet MS', 'Lucida Sans Unicode', 'Lucida Grande', 'Lucida Sans', Arial, sans-serif;
+}
+
+.container {
+  display: block;
+  background-color: #85b8ff72;
+  border-radius: 11px;
+  border: 1px solid whitesmoke;
+  color: whitesmoke;
+  padding: 15px 13px;
+}
+
+.container form {
+  width: 100%;
+}
+
+.container form > * {
+  width: 100%;
+  display: block;
+  box-sizing: border-box;
+}
+
+label {
+  font-size: 0.9rem;;
+}
+
+label:nth-of-type(2), 
+label:nth-of-type(3),
+.radio-group,
+label:nth-of-type(4),
+button {
+  margin-top: 13px;
+}
+
+input, 
+select, 
+textarea {
+  border-radius: 7px;
+  border: 2px solid transparent;
+  padding: 4px 6px;
+}
+
+#position {
+  outline: none;
+}
+
+.radio-group {
+  box-sizing: border-box;
+  border-radius: 7px;
+  width: 100%;
+  border: 1px solid whitesmoke;
+}
+
+.radio-group legend {
+  font-size: 0.9rem;
+}
+
+.radio-group label {
+  font-size: 0.9rem;
+}
+
+.radio-group input[type="radio"] {
+  appearance: none;
+  width: 20px;
+  height: 20px;
+  border-radius: 50%;
+  border: 2px solid whitesmoke;
+  vertical-align: bottom;
+}
+
+.radio-group input[type="radio"]::before {
+  display: block;
+  content: " ";
+  width: 10px;
+  height: 10px;
+  border-radius: 50%;
+  transform: translate(-3px, -1px) scale(0);
+  transition: all 0.3s ease-in;
+}
+
+.radio-group input[type="radio"]:checked::before {
+  transform: translate(-3px, -1px) scale(1);
+  background-color: rgb(0, 255, 110);
+}
+
+.radio-group input[type="radio"]:checked {
+  border-color: #00ff6e;
+  background-color: #ffffff;
+  box-shadow:  0 0 7px rgba(0, 255, 110, 0.06)
+}
+
+.radio-group input[type="radio"]:checked + label {
+  color: #00ff6e;
+}
+
+form > label {
+  margin-bottom: 4px;
+}
+
+button {
+  cursor: pointer;
+  background-color: #305e92;
+  color: whitesmoke;
+  border: 1px solid;
+  border-radius: 7px;
+  padding: 5px;
+  font-size: 1.1rem;
+  font-weight: 500;
+  display: block;
+  margin-top: 16px;
+}
+
+button:hover {
+  background-color: #407bc0;
+}
+
+button:active {
+  background-color: #40c042;
+}
+
+
+input:valid,
+select:valid,
+textarea:valid {
+  border-color: green;
+}
+
+input:invalid,
+select:invalid,
+textarea:invalid {
+  border-color: red;
+}
+
+input:focus,
+textarea:focus {
+  border-color: #7cdeff;
+  outline: none;
+}
+
+input:first-of-type {
+  background-color: #bedef8;
+}
